@@ -26,6 +26,7 @@ export interface SharedData {
     name: string;
     quote: { message: string; author: string };
     auth: Auth;
+    org: { all: OranizationData[], current: OranizationData };
     ziggy: Config & { location: string };
     sidebarOpen: boolean;
     [key: string]: unknown;

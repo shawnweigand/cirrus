@@ -1,9 +1,8 @@
 import { DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 import { Link } from '@inertiajs/react';
-
 interface OrgMenuContentProps {
-    orgs: any[];
+    orgs: App.Data.OrganizationData[];
 }
 
 export function OrgMenuContent({ orgs }: OrgMenuContentProps) {
@@ -19,8 +18,8 @@ export function OrgMenuContent({ orgs }: OrgMenuContentProps) {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
                 {(orgs || []).map((org) =>
-                <DropdownMenuItem asChild>
-                    <Link className="block w-full" method="post" href='#' as="button" onClick={cleanup}>
+                <DropdownMenuItem asChild key={org.slug}>
+                    <Link className="block w-full" href={route('org.dashboard', org.slug)} as="button" onClick={cleanup}>
                         {org.name}
                     </Link>
                 </DropdownMenuItem>
