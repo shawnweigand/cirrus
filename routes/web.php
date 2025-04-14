@@ -12,7 +12,7 @@ Route::get('/', function () {
 Route::middleware(['auth', ValidateSessionWithWorkOS::class,])->group(function () {
 
     Route::get('dashboard', function () {
-        return redirect(route('org.dashboard', ['org' => Auth::user()->organizations->first()->slug]));
+        return redirect(route('org.dashboard', Auth::user()->organizations->first()->slug));
     })->name('dashboard');
 
     Route::prefix('{slug}')->group(function () {
