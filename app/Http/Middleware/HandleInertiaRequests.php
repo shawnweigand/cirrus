@@ -48,8 +48,8 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'org' => [
-                'all' => fn () => OrganizationData::collect($request->user()->organizations),
-                'current' => fn () => OrganizationData::collect($request->user()->organizations)->firstWhere('slug', $request->route('slug')),
+                'all' => fn () => $request->user() ? OrganizationData::collect($request->user()->organizations) : collect([]),
+                'current' => fn () => $request->user() ? OrganizationData::collect($request->user()->organizations)->firstWhere('slug', $request->route('slug')) : null,
             ],
             'ziggy' => fn (): array => [
                 ...(new Ziggy)->toArray(),
