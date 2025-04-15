@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Puzzle } from 'lucide-react';
 import AppLogo from './app-logo';
 import UserOrg from './user-org';
 
@@ -13,6 +13,13 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         href: '/dashboard',
         icon: LayoutGrid,
+        group: 'platform',
+    },
+    {
+        title: 'Templates',
+        href: '#',
+        icon: Puzzle,
+        group: 'management',
     },
 ];
 
