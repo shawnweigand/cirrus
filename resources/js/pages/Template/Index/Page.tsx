@@ -9,6 +9,7 @@ import { DataTable } from './Partials/DataTable';
 import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { DataTableColumnHeader } from '@/components/ui/data-table';
 
 type Payment = {
     id: string
@@ -62,18 +63,9 @@ export const columns: ColumnDef<Payment>[] = [
     },
     {
         accessorKey: "email",
-        header: ({ column }) => {
-            return (
-              <Button
-                variant="ghost"
-                onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-              >
-                Email
-                <ArrowUpDown className="ml-2 h-4 w-4" />
-              </Button>
-            )
-        },
-    },
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="Email" />
+        )},
     {
         accessorKey: "amount",
         header: () => <div className="text-right">Amount</div>,
