@@ -38,7 +38,8 @@ class TemplateController extends Controller
      */
     public function show(Template $template)
     {
-        //
+        return Inertia::render('Template/Show/Page', [
+        ]);
     }
 
     /**
