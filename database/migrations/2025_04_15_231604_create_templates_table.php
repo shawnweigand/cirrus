@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Template\TemplateCategoryEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +14,16 @@ return new class extends Migration
     {
         Schema::create('templates', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->enum('category', TemplateCategoryEnum::getValues());
+            $table->string('source');
+            $table->string('version');
+            $table->json('form')->nullable();
+            $table->foreignId('organization_id')
+                ->constrained()
+                ->cascadeOnDelete();
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

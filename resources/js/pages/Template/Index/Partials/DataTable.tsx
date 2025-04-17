@@ -40,7 +40,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     })
 
     return (
-        <div>
+        <div className="m-7">
             <div className="flex items-center py-4">
                 <Input
                     placeholder="Filter emails..."
@@ -52,7 +52,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                 />
                 <DataTableViewOptions table={table} />
             </div>
-            <div className="rounded-md border">
+            <div className="rounded-md border mb-4">
                 <Table>
                     <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
