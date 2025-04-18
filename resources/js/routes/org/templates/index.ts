@@ -1,9 +1,9 @@
 import create from './create'
 import store from './store'
-import show from './show'
 import edit from './edit'
 import update from './update'
 import destroy from './destroy'
+import show from './show'
 import { queryParams, type QueryParams } from './../../../wayfinder'
 
 /**
@@ -79,10 +79,10 @@ const templates = {
     index, 
     create, 
     store, 
-    show, 
     edit, 
     update, 
-    destroy,
+    destroy, 
+    show,
 }
 
 export default templates

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('templates', function (Blueprint $table) {
             $table->id();
+            $table->string('slug');
             $table->string('name');
             $table->text('description')->nullable();
             $table->enum('category', TemplateCategoryEnum::getValues());

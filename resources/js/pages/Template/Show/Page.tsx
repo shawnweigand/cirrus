@@ -12,10 +12,10 @@ export default function Page() {
     const { org } = usePage<SharedData>().props;
 
     const breadcrumbs: BreadcrumbItem[] = [
-        {
-            title: 'Templates',
-            href: route('org.templates', org.current.slug),
-        },
+        // {
+        //     title: 'Templates',
+        //     href: route('org.templates', org.current.slug),
+        // },
     ];
 
     return (

@@ -2,7 +2,7 @@ import { queryParams, type QueryParams } from './../../../wayfinder'
 
 /**
  * @see \App\Http\Controllers\TemplateController::store
- * @see app/Http/Controllers/TemplateController.php:41
+ * @see app/Http/Controllers/TemplateController.php:43
  * @route /{slug}/templates
  */
 export const store = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -20,7 +20,7 @@ store.definition = {
 
 /**
  * @see \App\Http\Controllers\TemplateController::store
- * @see app/Http/Controllers/TemplateController.php:41
+ * @see app/Http/Controllers/TemplateController.php:43
  * @route /{slug}/templates
  */
 store.url = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -45,7 +45,7 @@ store.url = (args: { slug: string | number } | [slug: string | number] | string 
 
 /**
  * @see \App\Http\Controllers\TemplateController::store
- * @see app/Http/Controllers/TemplateController.php:41
+ * @see app/Http/Controllers/TemplateController.php:43
  * @route /{slug}/templates
  */
 store.post = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

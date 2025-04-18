@@ -148,13 +148,17 @@ interface DataTableViewOptionsProps<TData> {
   }
 
   export function DataTablePagination<TData>({
-    table,
+    table
   }: DataTablePaginationProps<TData>) {
     return (
       <div className="flex items-center justify-between px-2">
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+            {table.getFilteredSelectedRowModel().rows.length > 0 && (
+                <>
+                    {table.getFilteredSelectedRowModel().rows.length} of{" "}
+                    {table.getFilteredRowModel().rows.length} row(s) selected.
+                </>
+            )}
         </div>
         <div className="flex items-center space-x-6 lg:space-x-8">
           <div className="flex items-center space-x-2">

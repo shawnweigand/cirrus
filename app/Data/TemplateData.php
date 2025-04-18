@@ -11,6 +11,7 @@ use Spatie\LaravelData\Attributes\Validation\Enum;
 class TemplateData extends Data
 {
     public function __construct(
+        public string $slug,
         public string $name,
         public ?string $description = null,
         #[Enum(TemplateCategoryEnum::class)]
@@ -29,6 +30,7 @@ class TemplateData extends Data
     public static function fromModel(Template $template): self
     {
         return new self(
+            $template->slug,
             $template->name,
             $template->description,
             $template->category->description,
