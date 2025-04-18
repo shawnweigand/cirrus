@@ -7,6 +7,7 @@ created_at: string;
 updated_at: string;
 };
 export type TemplateData = {
+slug: string;
 name: string;
 description: string | null;
 category: string;

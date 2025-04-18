@@ -126,13 +126,13 @@ export default function Page({ templates }: ExtendedPageProps) {
         },
         {
             accessorKey: "category",
-            header: ({ column }) => (
+            header: ({ column }: { column: any }) => (
                 <DataTableColumnHeader column={column} title="Category" />
             ),
         },
         {
             accessorKey: "version",
-            header: ({ column }) => (
+            header: ({ column }: { column: any }) => (
                 <DataTableColumnHeader column={column} title="Version" />
             ),
             enableSearching: false,
@@ -145,7 +145,7 @@ export default function Page({ templates }: ExtendedPageProps) {
         // },
         {
             id: "actions",
-            cell: ({ row }) => {
+            cell: ({ row }: { row: any }) => {
                 const template = row.original
 
                 return (
@@ -181,7 +181,7 @@ export default function Page({ templates }: ExtendedPageProps) {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Templates',
-            href: route('org.dashboard', org.current.slug),
+            href: route('org.templates.index', org.current.slug),
         },
     ];
 
