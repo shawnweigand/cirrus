@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\TemplateData;
+use App\Models\Organization;
 use App\Models\Template;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -11,9 +13,16 @@ class TemplateController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $slug)
     {
         return Inertia::render('Template/Index/Page', [
+            'templates' => fn () => TemplateData::collect(
+                Organization::where('slug', $slug)->first()
+                ?->templates
+                ->where('is_active', true)
+                ->unique('name')
+                ->values()
+            ),
         ]);
     }
 

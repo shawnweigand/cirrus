@@ -2,7 +2,7 @@ import { queryParams, type QueryParams } from './../../../wayfinder'
 
 /**
  * @see \App\Http\Controllers\TemplateController::update
- * @see app/Http/Controllers/TemplateController.php:56
+ * @see app/Http/Controllers/TemplateController.php:65
  * @route /{slug}/templates/{template}
  */
 export const update = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -20,7 +20,7 @@ update.definition = {
 
 /**
  * @see \App\Http\Controllers\TemplateController::update
- * @see app/Http/Controllers/TemplateController.php:56
+ * @see app/Http/Controllers/TemplateController.php:65
  * @route /{slug}/templates/{template}
  */
 update.url = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -46,7 +46,7 @@ update.url = (args: { slug: string | number, template: string | { id: string } }
 
 /**
  * @see \App\Http\Controllers\TemplateController::update
- * @see app/Http/Controllers/TemplateController.php:56
+ * @see app/Http/Controllers/TemplateController.php:65
  * @route /{slug}/templates/{template}
  */
 update.put = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -59,7 +59,7 @@ update.put = (args: { slug: string | number, template: string | { id: string } }
 
 /**
  * @see \App\Http\Controllers\TemplateController::update
- * @see app/Http/Controllers/TemplateController.php:56
+ * @see app/Http/Controllers/TemplateController.php:65
  * @route /{slug}/templates/{template}
  */
 update.patch = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

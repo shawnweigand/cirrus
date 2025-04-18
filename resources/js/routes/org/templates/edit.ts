@@ -2,7 +2,7 @@ import { queryParams, type QueryParams } from './../../../wayfinder'
 
 /**
  * @see \App\Http\Controllers\TemplateController::edit
- * @see app/Http/Controllers/TemplateController.php:48
+ * @see app/Http/Controllers/TemplateController.php:57
  * @route /{slug}/templates/{template}/edit
  */
 export const edit = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -20,7 +20,7 @@ edit.definition = {
 
 /**
  * @see \App\Http\Controllers\TemplateController::edit
- * @see app/Http/Controllers/TemplateController.php:48
+ * @see app/Http/Controllers/TemplateController.php:57
  * @route /{slug}/templates/{template}/edit
  */
 edit.url = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -46,7 +46,7 @@ edit.url = (args: { slug: string | number, template: string | { id: string } } |
 
 /**
  * @see \App\Http\Controllers\TemplateController::edit
- * @see app/Http/Controllers/TemplateController.php:48
+ * @see app/Http/Controllers/TemplateController.php:57
  * @route /{slug}/templates/{template}/edit
  */
 edit.get = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -59,7 +59,7 @@ edit.get = (args: { slug: string | number, template: string | { id: string } } |
 
 /**
  * @see \App\Http\Controllers\TemplateController::edit
- * @see app/Http/Controllers/TemplateController.php:48
+ * @see app/Http/Controllers/TemplateController.php:57
  * @route /{slug}/templates/{template}/edit
  */
 edit.head = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

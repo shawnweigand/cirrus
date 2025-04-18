@@ -10,6 +10,11 @@ import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { DataTableColumnHeader } from '@/components/ui/data-table';
+import { access } from 'fs';
+
+type ExtendedPageProps = {
+    templates: App.Data.TemplateData[]
+}
 
 type Payment = {
     id: string
@@ -65,7 +70,8 @@ export const columns: ColumnDef<Payment>[] = [
         accessorKey: "email",
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="Email" />
-        )},
+        )
+    },
     {
         accessorKey: "amount",
         header: () => <div className="text-right">Amount</div>,
@@ -110,7 +116,22 @@ export const columns: ColumnDef<Payment>[] = [
 ]
 
 
-export default function Page() {
+export default function Page({ templates }: ExtendedPageProps) {
+
+    const cols = [
+        {
+            accessorKey: "name",
+            header: "Name",
+            enableHiding: false,
+        },
+        {
+            accessorKey: "version",
+            header: ({ column }) => (
+                <DataTableColumnHeader column={column} title="Version" />
+            ),
+            enableSearching: false,
+        },
+    ]
 
     const { org } = usePage<SharedData>().props;
 
@@ -124,7 +145,8 @@ export default function Page() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
-            <DataTable columns={columns} data={payments} />
+            {/* <DataTable columns={columns} data={payments} /> */}
+            <DataTable columns={cols} data={templates} />
         </AppLayout>
     );
 }

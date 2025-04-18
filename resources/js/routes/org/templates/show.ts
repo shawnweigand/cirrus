@@ -2,7 +2,7 @@ import { queryParams, type QueryParams } from './../../../wayfinder'
 
 /**
  * @see \App\Http\Controllers\TemplateController::show
- * @see app/Http/Controllers/TemplateController.php:39
+ * @see app/Http/Controllers/TemplateController.php:48
  * @route /{slug}/templates/{template}
  */
 export const show = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -20,7 +20,7 @@ show.definition = {
 
 /**
  * @see \App\Http\Controllers\TemplateController::show
- * @see app/Http/Controllers/TemplateController.php:39
+ * @see app/Http/Controllers/TemplateController.php:48
  * @route /{slug}/templates/{template}
  */
 show.url = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -46,7 +46,7 @@ show.url = (args: { slug: string | number, template: string | { id: string } } |
 
 /**
  * @see \App\Http\Controllers\TemplateController::show
- * @see app/Http/Controllers/TemplateController.php:39
+ * @see app/Http/Controllers/TemplateController.php:48
  * @route /{slug}/templates/{template}
  */
 show.get = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -59,7 +59,7 @@ show.get = (args: { slug: string | number, template: string | { id: string } } |
 
 /**
  * @see \App\Http\Controllers\TemplateController::show
- * @see app/Http/Controllers/TemplateController.php:39
+ * @see app/Http/Controllers/TemplateController.php:48
  * @route /{slug}/templates/{template}
  */
 show.head = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

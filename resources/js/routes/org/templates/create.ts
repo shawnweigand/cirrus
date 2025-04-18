@@ -2,7 +2,7 @@ import { queryParams, type QueryParams } from './../../../wayfinder'
 
 /**
  * @see \App\Http\Controllers\TemplateController::create
- * @see app/Http/Controllers/TemplateController.php:23
+ * @see app/Http/Controllers/TemplateController.php:32
  * @route /{slug}/templates/create
  */
 export const create = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -20,7 +20,7 @@ create.definition = {
 
 /**
  * @see \App\Http\Controllers\TemplateController::create
- * @see app/Http/Controllers/TemplateController.php:23
+ * @see app/Http/Controllers/TemplateController.php:32
  * @route /{slug}/templates/create
  */
 create.url = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -45,7 +45,7 @@ create.url = (args: { slug: string | number } | [slug: string | number] | string
 
 /**
  * @see \App\Http\Controllers\TemplateController::create
- * @see app/Http/Controllers/TemplateController.php:23
+ * @see app/Http/Controllers/TemplateController.php:32
  * @route /{slug}/templates/create
  */
 create.get = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -58,7 +58,7 @@ create.get = (args: { slug: string | number } | [slug: string | number] | string
 
 /**
  * @see \App\Http\Controllers\TemplateController::create
- * @see app/Http/Controllers/TemplateController.php:23
+ * @see app/Http/Controllers/TemplateController.php:32
  * @route /{slug}/templates/create
  */
 create.head = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
