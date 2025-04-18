@@ -125,12 +125,24 @@ export default function Page({ templates }: ExtendedPageProps) {
             enableHiding: false,
         },
         {
+            accessorKey: "category",
+            header: ({ column }) => (
+                <DataTableColumnHeader column={column} title="Category" />
+            ),
+        },
+        {
             accessorKey: "version",
             header: ({ column }) => (
                 <DataTableColumnHeader column={column} title="Version" />
             ),
             enableSearching: false,
         },
+        // {
+        //     accessorKey: "kind",
+        //     header: ({ column }) => (
+        //         <DataTableColumnHeader column={column} title="Kind" />
+        //     ),
+        // },
     ]
 
     const { org } = usePage<SharedData>().props;

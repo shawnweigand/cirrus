@@ -8,7 +8,7 @@ import { queryParams, type QueryParams } from './../../../wayfinder'
 
 /**
  * @see \App\Http\Controllers\TemplateController::index
- * @see app/Http/Controllers/TemplateController.php:16
+ * @see app/Http/Controllers/TemplateController.php:17
  * @route /{slug}/templates
  */
 export const index = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -26,7 +26,7 @@ index.definition = {
 
 /**
  * @see \App\Http\Controllers\TemplateController::index
- * @see app/Http/Controllers/TemplateController.php:16
+ * @see app/Http/Controllers/TemplateController.php:17
  * @route /{slug}/templates
  */
 index.url = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -51,7 +51,7 @@ index.url = (args: { slug: string | number } | [slug: string | number] | string 
 
 /**
  * @see \App\Http\Controllers\TemplateController::index
- * @see app/Http/Controllers/TemplateController.php:16
+ * @see app/Http/Controllers/TemplateController.php:17
  * @route /{slug}/templates
  */
 index.get = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -64,7 +64,7 @@ index.get = (args: { slug: string | number } | [slug: string | number] | string 
 
 /**
  * @see \App\Http\Controllers\TemplateController::index
- * @see app/Http/Controllers/TemplateController.php:16
+ * @see app/Http/Controllers/TemplateController.php:17
  * @route /{slug}/templates
  */
 index.head = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

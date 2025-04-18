@@ -31,8 +31,8 @@ class TemplateData extends Data
         return new self(
             $template->name,
             $template->description,
-            $template->category,
-            $template->kind,
+            $template->category->description,
+            $template->kind->description,
             $template->source,
             $template->version,
             $template->form,

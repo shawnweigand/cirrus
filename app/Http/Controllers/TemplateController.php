@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Data\TemplateData;
+use App\Enums\Template\TemplateCategoryEnum;
 use App\Models\Organization;
 use App\Models\Template;
 use Illuminate\Http\Request;
