@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\Template\TemplateCategoryEnum;
+use App\Enums\Template\TemplateKindEnum;
 use Illuminate\Database\Eloquent\Model;
 
 class Template extends Model
@@ -10,6 +12,7 @@ class Template extends Model
         'name',
         'description',
         'category',
+        'kind',
         'source',
         'version',
         'form',
@@ -21,7 +24,8 @@ class Template extends Model
     {
         return [
             'form' => 'array',
-            'source'
+            'category' => TemplateCategoryEnum::class,
+            'kind' => TemplateKindEnum::class,
         ];
     }
 

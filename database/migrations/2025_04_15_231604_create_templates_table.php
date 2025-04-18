@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Template\TemplateCategoryEnum;
+use App\Enums\Template\TemplateKindEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->enum('category', TemplateCategoryEnum::getValues());
+            $table->enum('kind', TemplateKindEnum::getValues());
             $table->string('source');
             $table->string('version');
             $table->json('form')->nullable();
