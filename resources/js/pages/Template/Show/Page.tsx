@@ -7,10 +7,28 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import AppLayout from '@/layouts/app-layout';
 import { SharedData, type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
+import { Braces, ClipboardList } from 'lucide-react';
 
 type ExtendedPageProps = {
     templates: App.Data.TemplateData[]
 }
+
+const fields = [
+    {
+        key: 'purpose',
+        label: 'Purpose',
+        description: 'The purpose of the template',
+        type: 'text',
+        default: '',
+        code: true,
+        condition: 'true',
+        validation: [
+            'required',
+            'string',
+            'max:3',
+        ]
+    }
+]
 
 export default function Page({ templates }: ExtendedPageProps) {
     const { org } = usePage<SharedData>().props;
@@ -32,15 +50,19 @@ export default function Page({ templates }: ExtendedPageProps) {
 
         <ResizablePanelGroup direction="horizontal">
             <ResizablePanel>
-            <Tabs defaultValue="account" className="w-[400px]">
+            <Tabs defaultValue="list" className="w-[400px]">
                 <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="account">Account</TabsTrigger>
-                    <TabsTrigger value="password">Password</TabsTrigger>
+                    <TabsTrigger value="list">
+                        <ClipboardList className='w-4 h-4' />
+                    </TabsTrigger>
+                    <TabsTrigger value="code">
+                        <Braces className='w-4 h-4' />
+                    </TabsTrigger>
                 </TabsList>
-                <TabsContent value="account">
+                <TabsContent value="list">
                     Account
                 </TabsContent>
-                <TabsContent value="password">
+                <TabsContent value="code">
                     Password
                 </TabsContent>
             </Tabs>
