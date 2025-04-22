@@ -5,7 +5,7 @@ import { queryParams, type QueryParams } from './../../../wayfinder'
  * @see app/Http/Controllers/TemplateController.php:75
  * @route /{slug}/templates/{template}/edit
  */
-export const edit = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+export const edit = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
     url: string,
     method: 'get',
 } => ({
@@ -23,7 +23,7 @@ edit.definition = {
  * @see app/Http/Controllers/TemplateController.php:75
  * @route /{slug}/templates/{template}/edit
  */
-edit.url = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
+edit.url = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
     if (Array.isArray(args)) {
         args = {
             slug: args[0],
@@ -49,7 +49,7 @@ edit.url = (args: { slug: string | number, template: string | { id: string } } |
  * @see app/Http/Controllers/TemplateController.php:75
  * @route /{slug}/templates/{template}/edit
  */
-edit.get = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+edit.get = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
     url: string,
     method: 'get',
 } => ({
@@ -62,7 +62,7 @@ edit.get = (args: { slug: string | number, template: string | { id: string } } |
  * @see app/Http/Controllers/TemplateController.php:75
  * @route /{slug}/templates/{template}/edit
  */
-edit.head = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+edit.head = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
     url: string,
     method: 'head',
 } => ({

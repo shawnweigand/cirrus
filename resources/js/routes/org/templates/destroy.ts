@@ -5,7 +5,7 @@ import { queryParams, type QueryParams } from './../../../wayfinder'
  * @see app/Http/Controllers/TemplateController.php:91
  * @route /{slug}/templates/{template}
  */
-export const destroy = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+export const destroy = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
     url: string,
     method: 'delete',
 } => ({
@@ -23,7 +23,7 @@ destroy.definition = {
  * @see app/Http/Controllers/TemplateController.php:91
  * @route /{slug}/templates/{template}
  */
-destroy.url = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
+destroy.url = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
     if (Array.isArray(args)) {
         args = {
             slug: args[0],
@@ -49,7 +49,7 @@ destroy.url = (args: { slug: string | number, template: string | { id: string } 
  * @see app/Http/Controllers/TemplateController.php:91
  * @route /{slug}/templates/{template}
  */
-destroy.delete = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+destroy.delete = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
     url: string,
     method: 'delete',
 } => ({
