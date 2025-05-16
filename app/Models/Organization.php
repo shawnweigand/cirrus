@@ -20,4 +20,9 @@ class Organization extends Model
     {
         return $this->belongsToMany(User::class, 'organization_user');
     }
+
+    public function templates()
+    {
+        return $this->hasMany(Template::class);
+    }
 }

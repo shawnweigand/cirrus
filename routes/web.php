@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TemplateController;
+use App\Models\Organization;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,11 +17,22 @@ Route::middleware(['auth', ValidateSessionWithWorkOS::class,])->group(function (
         return redirect(route('org.dashboard', Auth::user()->organizations->first()->slug));
     })->name('dashboard');
 
-    Route::prefix('{slug}')->group(function () {
+    Route::prefix('{slug}')->as('org.')->group(function () {
+
         Route::get('/dashboard', function ($slug) {
+            Organization::where('slug', $slug)->firstOrFail();
             return Inertia::render('dashboard', [
             ]);
-        })->name('org.dashboard');
+        })->name('dashboard');
+
+        Route::resource('templates', TemplateController::class)
+        ->except(['show'])
+        ->scoped(['template' => 'id'])
+        ->names('templates');
+
+        Route::get('templates/{template_slug}', [TemplateController::class, 'show'])
+        ->name('templates.show');
+
     });
 
 });
