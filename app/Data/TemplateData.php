@@ -2,11 +2,14 @@
 
 namespace App\Data;
 
+use App\Data\Form\FieldData;
 use App\Enums\Template\TemplateCategoryEnum;
 use App\Enums\Template\TemplateKindEnum;
 use App\Models\Template;
+use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Attributes\Validation\Enum;
+use Spatie\LaravelData\DataCollection;
 
 class TemplateData extends Data
 {
@@ -20,7 +23,7 @@ class TemplateData extends Data
         public string $kind,
         public string $source,
         public string $version,
-        public ?array $form = null,
+        public ?DataCollection $form = new DataCollection(FieldData::class, []),
         public bool $is_active = false,
         public ?OrganizationData $organization = null,
         public string $created_at,
@@ -37,9 +40,10 @@ class TemplateData extends Data
             $template->kind->description,
             $template->source,
             $template->version,
-            $template->form,
+            # need to update [] to have mock values
+            $template->form ? new DataCollection(FieldData::class, $template->form) : new DataCollection(FieldData::class, []),
             $template->is_active,
-            $template->relationLoaded('organiation') ? OrganizationData::collect($template->organization) : null, // Include org if loaded
+            $template->relationLoaded('organization') ? OrganizationData::collect($template->organization) : null, // Include org if loaded
             $template->created_at->toDateTimeString(),
             $template->updated_at->toDateTimeString()
         );

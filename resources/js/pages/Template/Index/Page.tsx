@@ -165,7 +165,10 @@ export default function Page({ templates }: ExtendedPageProps) {
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>
-                                <Link href={route('org.templates.show', [org.current.slug, template.slug])}>
+                                <Link href={route('org.templates.edit', {
+                                    slug: org.current.slug,
+                                    template_slug: 'vm'
+                                })}>
                                     Edit Template
                                 </Link>
                             </DropdownMenuItem>

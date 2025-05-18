@@ -40,7 +40,7 @@ export default function Page({ templates }: ExtendedPageProps) {
         },
         {
             title: templates[0].name,
-            href: route('org.templates.show', [org.current.slug, templates[0].slug]),
+            href: route('org.templates.edit', [org.current.slug, templates[0].slug]),
         },
     ];
 
@@ -48,6 +48,30 @@ export default function Page({ templates }: ExtendedPageProps) {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Templates" />
 
+        <ResizablePanelGroup direction="horizontal">
+            <ResizablePanel>
+            <Tabs defaultValue="list" className="w-[400px]">
+                <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="list">
+                        <ClipboardList className='w-4 h-4' />
+                    </TabsTrigger>
+                    <TabsTrigger value="code">
+                        <Braces className='w-4 h-4' />
+                    </TabsTrigger>
+                </TabsList>
+                <TabsContent value="list">
+                    Account
+                </TabsContent>
+                <TabsContent value="code">
+                    Password
+                </TabsContent>
+            </Tabs>
+            </ResizablePanel>
+            <ResizableHandle withHandle />
+            <ResizablePanel>
+                Two
+            </ResizablePanel>
+        </ResizablePanelGroup>
 
         </AppLayout>
     );

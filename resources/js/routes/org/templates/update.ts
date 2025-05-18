@@ -2,10 +2,10 @@ import { queryParams, type QueryParams } from './../../../wayfinder'
 
 /**
  * @see \App\Http\Controllers\TemplateController::update
- * @see app/Http/Controllers/TemplateController.php:83
+ * @see app/Http/Controllers/TemplateController.php:99
  * @route /{slug}/templates/{template}
  */
-export const update = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+export const update = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
     url: string,
     method: 'put',
 } => ({
@@ -20,10 +20,10 @@ update.definition = {
 
 /**
  * @see \App\Http\Controllers\TemplateController::update
- * @see app/Http/Controllers/TemplateController.php:83
+ * @see app/Http/Controllers/TemplateController.php:99
  * @route /{slug}/templates/{template}
  */
-update.url = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
+update.url = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
     if (Array.isArray(args)) {
         args = {
             slug: args[0],
@@ -46,10 +46,10 @@ update.url = (args: { slug: string | number, template: string | number | { id: s
 
 /**
  * @see \App\Http\Controllers\TemplateController::update
- * @see app/Http/Controllers/TemplateController.php:83
+ * @see app/Http/Controllers/TemplateController.php:99
  * @route /{slug}/templates/{template}
  */
-update.put = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+update.put = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
     url: string,
     method: 'put',
 } => ({
@@ -59,10 +59,10 @@ update.put = (args: { slug: string | number, template: string | number | { id: s
 
 /**
  * @see \App\Http\Controllers\TemplateController::update
- * @see app/Http/Controllers/TemplateController.php:83
+ * @see app/Http/Controllers/TemplateController.php:99
  * @route /{slug}/templates/{template}
  */
-update.patch = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+update.patch = (args: { slug: string | number, template: string | { id: string } } | [slug: string | number, template: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
     url: string,
     method: 'patch',
 } => ({

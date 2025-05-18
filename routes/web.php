@@ -26,12 +26,15 @@ Route::middleware(['auth', ValidateSessionWithWorkOS::class,])->group(function (
         })->name('dashboard');
 
         Route::resource('templates', TemplateController::class)
-        ->except(['show'])
-        ->scoped(['template' => 'id'])
-        ->names('templates');
+            ->except(['show', 'edit'])
+            ->scoped(['template' => 'id'])
+            ->names('templates');
+
+        Route::get('templates/{template_slug}/edit', [TemplateController::class, 'edit'])
+            ->name('templates.edit');
 
         Route::get('templates/{template_slug}', [TemplateController::class, 'show'])
-        ->name('templates.show');
+            ->name('templates.show');
 
     });
 
