@@ -13,23 +13,6 @@ type ExtendedPageProps = {
     templates: App.Data.TemplateData[]
 }
 
-const fields = [
-    {
-        key: 'purpose',
-        label: 'Purpose',
-        description: 'The purpose of the template',
-        type: 'text',
-        default: '',
-        code: true,
-        condition: 'true',
-        validation: [
-            'required',
-            'string',
-            'max:3',
-        ]
-    }
-]
-
 export default function Page({ templates }: ExtendedPageProps) {
     const { org } = usePage<SharedData>().props;
 

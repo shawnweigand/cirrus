@@ -10,9 +10,10 @@ class TextFieldData extends FieldData
         string $label,
         string $description,
         ?array $validation = [],
-        ?string $condition = null,
-        public ?string $default = '',
+        ?string $condition = "true",
+        ?bool $inCode = true,
+        public ?string $default = null,
     ) {
-        parent::__construct($id, $type, $label, $description, $validation, $condition);
+        parent::__construct($id, $type, $label, $description, $validation, $condition, $inCode);
     }
 }

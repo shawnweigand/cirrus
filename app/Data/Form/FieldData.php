@@ -12,6 +12,7 @@ class FieldData extends Data
         public string $label,
         public string $description,
         public ?array $validation = [],
-        public ?string $condition = null,
+        public ?string $condition = "true",
+        public ?bool $inCode = true,
     ) {}
 }

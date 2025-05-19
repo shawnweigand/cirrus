@@ -10,6 +10,7 @@ abstract class Field
     public string $description;
     public ?array $validation;
     public ?string $condition;
+    public ?bool $inCode;
 
     public function __construct(object $field)
     {
@@ -18,7 +19,8 @@ abstract class Field
         $this->label = $field->label;
         $this->description = $field->description;
         $this->validation = $field->validation ?? [];
-        $this->condition = $field->condition ?? null;
+        $this->condition = $field->condition ?? "true";
+        $this->inCode = $field->inCode ?? true;
     }
 
     public function toArray(): array
@@ -30,6 +32,7 @@ abstract class Field
             'description' => $this->description,
             'validation' => $this->validation,
             'condition' => $this->condition,
+            'inCode' => $this->inCode,
         ];
     }
 
