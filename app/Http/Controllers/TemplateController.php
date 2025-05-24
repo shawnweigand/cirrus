@@ -72,9 +72,25 @@ class TemplateController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Template $template)
+    public function edit(string $slug, string $template_slug)
     {
-        //
+        $organization = Organization::where('slug', $slug)->firstOrFail();
+
+        $templates = $organization
+            ?->templates()
+            ->where('slug', $template_slug)
+            ->get();
+
+        if ($templates->isEmpty()) {
+            abort(404);
+        }
+
+        return Inertia::render('Template/Edit/Page', [
+            'templates' => fn () => TemplateData::collect(
+                $templates
+                ->values()
+            ),
+        ]);
     }
 
     /**
