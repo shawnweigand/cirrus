@@ -1,13 +1,8 @@
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import AppLayout from '@/layouts/app-layout';
+import Form from '@/pages/Form/Form';
+import { FormContextProvider } from '@/pages/Form/FormContext';
 import { SharedData, type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
-import { Braces, ClipboardList } from 'lucide-react';
 
 type ExtendedPageProps = {
     templates: App.Data.TemplateData[]
@@ -31,6 +26,11 @@ export default function Page({ templates }: ExtendedPageProps) {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Templates" />
 
+            {templates.map(template => (
+                <FormContextProvider rawTemplate={template}>
+                    <Form key={`${template.organization}-${template.slug}`} />
+                </FormContextProvider>
+            ))}
 
         </AppLayout>
     );
