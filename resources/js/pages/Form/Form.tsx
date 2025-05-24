@@ -23,16 +23,18 @@ export default function Form({ }: ExtendedPageProps) {
     return (
         <ReactForm {...form}>
 
-          <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
-            {evlauatedFormFields?.map(field => {
-                return selectField(field)
-            })}
-            <Button type="submit">Submit</Button>
-          </form>
+        <div className="w-full max-w-3xl mx-auto">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
+                {evlauatedFormFields?.map(field => {
+                    return selectField(field)
+                })}
+                <Button type="submit">Submit</Button>
+            </form>
+        </div>
 
-            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                <code className="text-white">{JSON.stringify(rawTemplate, null, 2)}</code>
-            </pre>
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">{JSON.stringify(rawTemplate, null, 2)}</code>
+        </pre>
 
         </ReactForm>
       )

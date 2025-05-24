@@ -4,6 +4,7 @@ import { z, ZodType } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm as useReactForm } from "react-hook-form"
 import { toast } from "sonner"
+import { Field } from "@headlessui/react";
 
 // Define types
 interface FormContextType {
@@ -26,22 +27,37 @@ type ExtendedPageProps = {
 export const FormContextProvider = ({ children, rawTemplate }: ExtendedPageProps) => {
 
     // Form fields -> evaluate the form conditions and return valid
-    let evlauatedFormFields = rawTemplate.form
+    let evlauatedFormFields = rawTemplate.form ?? []
 
     // Schema builder
-    const formSchema = z.object({
-        username: z.string()
-        // .min(2, {
-        //   message: "Username must be at least 2 characters.",
-        // }),
-    })
+    const formSchema = z.object(Object.fromEntries(
+        evlauatedFormFields.map(field => {
+            switch (field.type) {
+                case "text":
+                    return [field.id, z.string()];
+                default:
+                    return [field.id, z.any()]; // fallback
+            }
+        })
+    ))
+    // Add after z.string() for other validation
+    // .min(2, {
+    //   message: "Username must be at least 2 characters.",
+    // }),
 
     // Form builder
     const form = useReactForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            username: "",
-        },
+        defaultValues: Object.fromEntries(
+            evlauatedFormFields.map(field => {
+                switch (field.type) {
+                    case "text":
+                        return [field.id, field.default ?? ""];
+                    default:
+                        return [field.id, null]; // fallback
+                }
+            })
+        )
     })
 
     // Submit

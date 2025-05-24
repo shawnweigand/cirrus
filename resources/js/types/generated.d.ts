@@ -27,16 +27,17 @@ id: string;
 type: string;
 label: string;
 description: string;
+default: any;
 validation: Array<any> | null;
 condition: string | null;
 inCode: boolean | null;
 };
 export type TextFieldData = {
-default: string | null;
 id: string;
 type: string;
 label: string;
 description: string;
+default: any;
 validation: Array<any> | null;
 condition: string | null;
 inCode: boolean | null;

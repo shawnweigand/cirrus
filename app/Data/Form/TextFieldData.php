@@ -6,14 +6,13 @@ class TextFieldData extends FieldData
 {
     public function __construct(
         string $id,
-        string $type,
         string $label,
         string $description,
+        ?string $default = null,
         ?array $validation = [],
         ?string $condition = "true",
         ?bool $inCode = true,
-        public ?string $default = null,
     ) {
-        parent::__construct($id, $type, $label, $description, $validation, $condition, $inCode);
+        parent::__construct($id, 'text', $label, $description, $default, $validation, $condition, $inCode);
     }
 }

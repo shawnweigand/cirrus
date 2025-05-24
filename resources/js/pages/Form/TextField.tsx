@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { useFormContext } from "./FormContext";
 
 type ExtendedPageProps = {
-    templateField: App.Data.Form.FieldData
+    templateField: App.Data.Form.TextFieldData
 }
 
 export default function TextField({ templateField }: ExtendedPageProps) {
@@ -13,15 +13,15 @@ export default function TextField({ templateField }: ExtendedPageProps) {
     return (
         <FormField
               control={form.control}
-              name="username"
+              name={templateField.id}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+         <FormLabel>{templateField.label}</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input placeholder={templateField.default ?? ""} {...field} />
                   </FormControl>
                   <FormDescription>
-                    This is your public display name.
+                    {templateField.description}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
