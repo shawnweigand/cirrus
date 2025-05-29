@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\TemplateController;
 use App\Models\Organization;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,10 @@ Route::middleware(['auth', ValidateSessionWithWorkOS::class,])->group(function (
 
         Route::get('templates/{template_slug}', [TemplateController::class, 'show'])
             ->name('templates.show');
+
+        Route::resource('submissions', SubmissionController::class)
+            ->scoped(['submission' => 'id'])
+            ->names('submissions');
 
     });
 

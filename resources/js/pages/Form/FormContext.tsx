@@ -1,10 +1,13 @@
 import { createContext, ReactNode, useContext } from "react";
-import { UseFormReturn } from "react-hook-form";
+import { set, UseFormReturn } from "react-hook-form";
 import { z, ZodType } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm as useReactForm } from "react-hook-form"
 import { toast } from "sonner"
 import { Field } from "@headlessui/react";
+import { usePage } from "@inertiajs/react";
+import { SharedData } from "@/types";
+import { useForm } from '@inertiajs/react'
 
 // Define types
 interface FormContextType {
@@ -12,6 +15,8 @@ interface FormContextType {
     evlauatedFormFields: Array<App.Data.Form.FieldData> | null;
     formSchema: z.ZodObject<any>;
     form: UseFormReturn<any>;
+    errors: Partial<Record<keyof FormData, string>>;
+    processing: boolean;
     onSubmit: (data: z.infer<ZodType<any, any, any>>) => void;
 }
 
@@ -25,6 +30,8 @@ type ExtendedPageProps = {
 }
 
 export const FormContextProvider = ({ children, rawTemplate }: ExtendedPageProps) => {
+
+    const { org } = usePage<SharedData>().props;
 
     // Form fields -> evaluate the form conditions and return valid
     let evlauatedFormFields = rawTemplate.form ?? []
@@ -60,8 +67,12 @@ export const FormContextProvider = ({ children, rawTemplate }: ExtendedPageProps
         )
     })
 
+    const { data, setData, post, processing, errors } = useForm(form.getValues());
+
     // Submit
-    function onSubmit(data: z.infer<typeof formSchema>) {
+    function onSubmit(data: z.infer<typeof formSchema>, event?: React.FormEvent<HTMLFormElement>) {
+        event?.preventDefault();
+        setData(data);
         toast("You submitted the following values:", {
           description: (
             <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
@@ -72,7 +83,7 @@ export const FormContextProvider = ({ children, rawTemplate }: ExtendedPageProps
     }
 
     return (
-      <FormContext.Provider value={{ rawTemplate, evlauatedFormFields, formSchema, form, onSubmit }}>
+      <FormContext.Provider value={{ rawTemplate, evlauatedFormFields, formSchema, form, errors, processing, onSubmit }}>
         {children}
       </FormContext.Provider>
     );
