@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Organization;
 use App\Models\Submission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SubmissionController extends Controller
 {
@@ -26,9 +28,21 @@ class SubmissionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(string $slug, Request $request)
     {
-        //
+        Log::info($request->all());
+        // $organization = Organization::where('slug', $slug)->firstOrFail();
+        // $template = $organization->templates()
+        //     ->where('slug', $request->input('template_slug'))
+        //     ->where('version', $request->input('template_version'))
+        //     ->firstOrFail();
+
+        // $submission = Submission::create([
+        //     'user_id' => $request->user()->id,
+        //     'template_id' => $template->id,
+        //     'values' => request()->all(),
+        //     'status' => 'submitted',
+        // ]);
     }
 
     /**

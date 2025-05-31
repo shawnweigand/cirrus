@@ -2,7 +2,7 @@ import { queryParams, type QueryParams } from './../../../wayfinder'
 
 /**
  * @see \App\Http\Controllers\SubmissionController::update
- * @see app/Http/Controllers/SubmissionController.php:53
+ * @see app/Http/Controllers/SubmissionController.php:67
  * @route /{slug}/submissions/{submission}
  */
 export const update = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -20,7 +20,7 @@ update.definition = {
 
 /**
  * @see \App\Http\Controllers\SubmissionController::update
- * @see app/Http/Controllers/SubmissionController.php:53
+ * @see app/Http/Controllers/SubmissionController.php:67
  * @route /{slug}/submissions/{submission}
  */
 update.url = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -46,7 +46,7 @@ update.url = (args: { slug: string | number, submission: string | { id: string }
 
 /**
  * @see \App\Http\Controllers\SubmissionController::update
- * @see app/Http/Controllers/SubmissionController.php:53
+ * @see app/Http/Controllers/SubmissionController.php:67
  * @route /{slug}/submissions/{submission}
  */
 update.put = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -59,7 +59,7 @@ update.put = (args: { slug: string | number, submission: string | { id: string }
 
 /**
  * @see \App\Http\Controllers\SubmissionController::update
- * @see app/Http/Controllers/SubmissionController.php:53
+ * @see app/Http/Controllers/SubmissionController.php:67
  * @route /{slug}/submissions/{submission}
  */
 update.patch = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

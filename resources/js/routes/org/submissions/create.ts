@@ -2,7 +2,7 @@ import { queryParams, type QueryParams } from './../../../wayfinder'
 
 /**
  * @see \App\Http\Controllers\SubmissionController::create
- * @see app/Http/Controllers/SubmissionController.php:21
+ * @see app/Http/Controllers/SubmissionController.php:23
  * @route /{slug}/submissions/create
  */
 export const create = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -20,7 +20,7 @@ create.definition = {
 
 /**
  * @see \App\Http\Controllers\SubmissionController::create
- * @see app/Http/Controllers/SubmissionController.php:21
+ * @see app/Http/Controllers/SubmissionController.php:23
  * @route /{slug}/submissions/create
  */
 create.url = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -45,7 +45,7 @@ create.url = (args: { slug: string | number } | [slug: string | number] | string
 
 /**
  * @see \App\Http\Controllers\SubmissionController::create
- * @see app/Http/Controllers/SubmissionController.php:21
+ * @see app/Http/Controllers/SubmissionController.php:23
  * @route /{slug}/submissions/create
  */
 create.get = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -58,7 +58,7 @@ create.get = (args: { slug: string | number } | [slug: string | number] | string
 
 /**
  * @see \App\Http\Controllers\SubmissionController::create
- * @see app/Http/Controllers/SubmissionController.php:21
+ * @see app/Http/Controllers/SubmissionController.php:23
  * @route /{slug}/submissions/create
  */
 create.head = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

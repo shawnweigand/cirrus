@@ -2,7 +2,7 @@ import { queryParams, type QueryParams } from './../../../wayfinder'
 
 /**
  * @see \App\Http\Controllers\SubmissionController::destroy
- * @see app/Http/Controllers/SubmissionController.php:61
+ * @see app/Http/Controllers/SubmissionController.php:75
  * @route /{slug}/submissions/{submission}
  */
 export const destroy = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -20,7 +20,7 @@ destroy.definition = {
 
 /**
  * @see \App\Http\Controllers\SubmissionController::destroy
- * @see app/Http/Controllers/SubmissionController.php:61
+ * @see app/Http/Controllers/SubmissionController.php:75
  * @route /{slug}/submissions/{submission}
  */
 destroy.url = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -46,7 +46,7 @@ destroy.url = (args: { slug: string | number, submission: string | { id: string 
 
 /**
  * @see \App\Http\Controllers\SubmissionController::destroy
- * @see app/Http/Controllers/SubmissionController.php:61
+ * @see app/Http/Controllers/SubmissionController.php:75
  * @route /{slug}/submissions/{submission}
  */
 destroy.delete = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

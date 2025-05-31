@@ -2,7 +2,7 @@ import { queryParams, type QueryParams } from './../../../wayfinder'
 
 /**
  * @see \App\Http\Controllers\SubmissionController::store
- * @see app/Http/Controllers/SubmissionController.php:29
+ * @see app/Http/Controllers/SubmissionController.php:31
  * @route /{slug}/submissions
  */
 export const store = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -20,7 +20,7 @@ store.definition = {
 
 /**
  * @see \App\Http\Controllers\SubmissionController::store
- * @see app/Http/Controllers/SubmissionController.php:29
+ * @see app/Http/Controllers/SubmissionController.php:31
  * @route /{slug}/submissions
  */
 store.url = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -45,7 +45,7 @@ store.url = (args: { slug: string | number } | [slug: string | number] | string 
 
 /**
  * @see \App\Http\Controllers\SubmissionController::store
- * @see app/Http/Controllers/SubmissionController.php:29
+ * @see app/Http/Controllers/SubmissionController.php:31
  * @route /{slug}/submissions
  */
 store.post = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

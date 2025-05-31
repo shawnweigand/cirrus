@@ -2,7 +2,7 @@ import { queryParams, type QueryParams } from './../../../../wayfinder'
 
 /**
  * @see \App\Http\Controllers\SubmissionController::index
- * @see app/Http/Controllers/SubmissionController.php:13
+ * @see app/Http/Controllers/SubmissionController.php:15
  * @route /{slug}/submissions
  */
 export const index = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -20,7 +20,7 @@ index.definition = {
 
 /**
  * @see \App\Http\Controllers\SubmissionController::index
- * @see app/Http/Controllers/SubmissionController.php:13
+ * @see app/Http/Controllers/SubmissionController.php:15
  * @route /{slug}/submissions
  */
 index.url = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -45,7 +45,7 @@ index.url = (args: { slug: string | number } | [slug: string | number] | string 
 
 /**
  * @see \App\Http\Controllers\SubmissionController::index
- * @see app/Http/Controllers/SubmissionController.php:13
+ * @see app/Http/Controllers/SubmissionController.php:15
  * @route /{slug}/submissions
  */
 index.get = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -58,7 +58,7 @@ index.get = (args: { slug: string | number } | [slug: string | number] | string 
 
 /**
  * @see \App\Http\Controllers\SubmissionController::index
- * @see app/Http/Controllers/SubmissionController.php:13
+ * @see app/Http/Controllers/SubmissionController.php:15
  * @route /{slug}/submissions
  */
 index.head = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -71,7 +71,7 @@ index.head = (args: { slug: string | number } | [slug: string | number] | string
 
 /**
  * @see \App\Http\Controllers\SubmissionController::create
- * @see app/Http/Controllers/SubmissionController.php:21
+ * @see app/Http/Controllers/SubmissionController.php:23
  * @route /{slug}/submissions/create
  */
 export const create = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -89,7 +89,7 @@ create.definition = {
 
 /**
  * @see \App\Http\Controllers\SubmissionController::create
- * @see app/Http/Controllers/SubmissionController.php:21
+ * @see app/Http/Controllers/SubmissionController.php:23
  * @route /{slug}/submissions/create
  */
 create.url = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -114,7 +114,7 @@ create.url = (args: { slug: string | number } | [slug: string | number] | string
 
 /**
  * @see \App\Http\Controllers\SubmissionController::create
- * @see app/Http/Controllers/SubmissionController.php:21
+ * @see app/Http/Controllers/SubmissionController.php:23
  * @route /{slug}/submissions/create
  */
 create.get = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -127,7 +127,7 @@ create.get = (args: { slug: string | number } | [slug: string | number] | string
 
 /**
  * @see \App\Http\Controllers\SubmissionController::create
- * @see app/Http/Controllers/SubmissionController.php:21
+ * @see app/Http/Controllers/SubmissionController.php:23
  * @route /{slug}/submissions/create
  */
 create.head = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -140,7 +140,7 @@ create.head = (args: { slug: string | number } | [slug: string | number] | strin
 
 /**
  * @see \App\Http\Controllers\SubmissionController::store
- * @see app/Http/Controllers/SubmissionController.php:29
+ * @see app/Http/Controllers/SubmissionController.php:31
  * @route /{slug}/submissions
  */
 export const store = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -158,7 +158,7 @@ store.definition = {
 
 /**
  * @see \App\Http\Controllers\SubmissionController::store
- * @see app/Http/Controllers/SubmissionController.php:29
+ * @see app/Http/Controllers/SubmissionController.php:31
  * @route /{slug}/submissions
  */
 store.url = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -183,7 +183,7 @@ store.url = (args: { slug: string | number } | [slug: string | number] | string 
 
 /**
  * @see \App\Http\Controllers\SubmissionController::store
- * @see app/Http/Controllers/SubmissionController.php:29
+ * @see app/Http/Controllers/SubmissionController.php:31
  * @route /{slug}/submissions
  */
 store.post = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -196,7 +196,7 @@ store.post = (args: { slug: string | number } | [slug: string | number] | string
 
 /**
  * @see \App\Http\Controllers\SubmissionController::show
- * @see app/Http/Controllers/SubmissionController.php:37
+ * @see app/Http/Controllers/SubmissionController.php:51
  * @route /{slug}/submissions/{submission}
  */
 export const show = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -214,7 +214,7 @@ show.definition = {
 
 /**
  * @see \App\Http\Controllers\SubmissionController::show
- * @see app/Http/Controllers/SubmissionController.php:37
+ * @see app/Http/Controllers/SubmissionController.php:51
  * @route /{slug}/submissions/{submission}
  */
 show.url = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -240,7 +240,7 @@ show.url = (args: { slug: string | number, submission: string | { id: string } }
 
 /**
  * @see \App\Http\Controllers\SubmissionController::show
- * @see app/Http/Controllers/SubmissionController.php:37
+ * @see app/Http/Controllers/SubmissionController.php:51
  * @route /{slug}/submissions/{submission}
  */
 show.get = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -253,7 +253,7 @@ show.get = (args: { slug: string | number, submission: string | { id: string } }
 
 /**
  * @see \App\Http\Controllers\SubmissionController::show
- * @see app/Http/Controllers/SubmissionController.php:37
+ * @see app/Http/Controllers/SubmissionController.php:51
  * @route /{slug}/submissions/{submission}
  */
 show.head = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -266,7 +266,7 @@ show.head = (args: { slug: string | number, submission: string | { id: string } 
 
 /**
  * @see \App\Http\Controllers\SubmissionController::edit
- * @see app/Http/Controllers/SubmissionController.php:45
+ * @see app/Http/Controllers/SubmissionController.php:59
  * @route /{slug}/submissions/{submission}/edit
  */
 export const edit = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -284,7 +284,7 @@ edit.definition = {
 
 /**
  * @see \App\Http\Controllers\SubmissionController::edit
- * @see app/Http/Controllers/SubmissionController.php:45
+ * @see app/Http/Controllers/SubmissionController.php:59
  * @route /{slug}/submissions/{submission}/edit
  */
 edit.url = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -310,7 +310,7 @@ edit.url = (args: { slug: string | number, submission: string | { id: string } }
 
 /**
  * @see \App\Http\Controllers\SubmissionController::edit
- * @see app/Http/Controllers/SubmissionController.php:45
+ * @see app/Http/Controllers/SubmissionController.php:59
  * @route /{slug}/submissions/{submission}/edit
  */
 edit.get = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -323,7 +323,7 @@ edit.get = (args: { slug: string | number, submission: string | { id: string } }
 
 /**
  * @see \App\Http\Controllers\SubmissionController::edit
- * @see app/Http/Controllers/SubmissionController.php:45
+ * @see app/Http/Controllers/SubmissionController.php:59
  * @route /{slug}/submissions/{submission}/edit
  */
 edit.head = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -336,7 +336,7 @@ edit.head = (args: { slug: string | number, submission: string | { id: string } 
 
 /**
  * @see \App\Http\Controllers\SubmissionController::update
- * @see app/Http/Controllers/SubmissionController.php:53
+ * @see app/Http/Controllers/SubmissionController.php:67
  * @route /{slug}/submissions/{submission}
  */
 export const update = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -354,7 +354,7 @@ update.definition = {
 
 /**
  * @see \App\Http\Controllers\SubmissionController::update
- * @see app/Http/Controllers/SubmissionController.php:53
+ * @see app/Http/Controllers/SubmissionController.php:67
  * @route /{slug}/submissions/{submission}
  */
 update.url = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -380,7 +380,7 @@ update.url = (args: { slug: string | number, submission: string | { id: string }
 
 /**
  * @see \App\Http\Controllers\SubmissionController::update
- * @see app/Http/Controllers/SubmissionController.php:53
+ * @see app/Http/Controllers/SubmissionController.php:67
  * @route /{slug}/submissions/{submission}
  */
 update.put = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -393,7 +393,7 @@ update.put = (args: { slug: string | number, submission: string | { id: string }
 
 /**
  * @see \App\Http\Controllers\SubmissionController::update
- * @see app/Http/Controllers/SubmissionController.php:53
+ * @see app/Http/Controllers/SubmissionController.php:67
  * @route /{slug}/submissions/{submission}
  */
 update.patch = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -406,7 +406,7 @@ update.patch = (args: { slug: string | number, submission: string | { id: string
 
 /**
  * @see \App\Http\Controllers\SubmissionController::destroy
- * @see app/Http/Controllers/SubmissionController.php:61
+ * @see app/Http/Controllers/SubmissionController.php:75
  * @route /{slug}/submissions/{submission}
  */
 export const destroy = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -424,7 +424,7 @@ destroy.definition = {
 
 /**
  * @see \App\Http\Controllers\SubmissionController::destroy
- * @see app/Http/Controllers/SubmissionController.php:61
+ * @see app/Http/Controllers/SubmissionController.php:75
  * @route /{slug}/submissions/{submission}
  */
 destroy.url = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -450,7 +450,7 @@ destroy.url = (args: { slug: string | number, submission: string | { id: string 
 
 /**
  * @see \App\Http\Controllers\SubmissionController::destroy
- * @see app/Http/Controllers/SubmissionController.php:61
+ * @see app/Http/Controllers/SubmissionController.php:75
  * @route /{slug}/submissions/{submission}
  */
 destroy.delete = (args: { slug: string | number, submission: string | { id: string } } | [slug: string | number, submission: string | { id: string }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

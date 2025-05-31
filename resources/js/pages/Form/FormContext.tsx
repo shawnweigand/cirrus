@@ -67,19 +67,28 @@ export const FormContextProvider = ({ children, rawTemplate }: ExtendedPageProps
         )
     })
 
-    const { data, setData, post, processing, errors } = useForm(form.getValues());
+    const { data, setData, post, processing, errors, reset } = useForm(form.getValues());
 
     // Submit
-    function onSubmit(data: z.infer<typeof formSchema>, event?: React.FormEvent<HTMLFormElement>) {
+    function onSubmit(formData: z.infer<typeof formSchema>, event?: React.FormEvent<HTMLFormElement>) {
         event?.preventDefault();
-        setData(data);
-        toast("You submitted the following values:", {
-          description: (
-            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-              <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-            </pre>
-          ),
-        })
+        // setData({...formData, 'template_slug': rawTemplate.slug, 'template_version': rawTemplate.version });
+        post(route('org.submissions.store', org.current.slug), {
+            preserveScroll: true,
+            onSuccess: () => {
+                reset();
+                toast("You submitted the following values:", {
+                    description: (
+                        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                        <code className="text-white">{JSON.stringify(formData, null, 2)}</code>
+                        </pre>
+                    ),
+                })
+            },
+            onError: (error) => {
+                toast.error(`Error submitting form: ${error.message}`);
+            },
+        });
     }
 
     return (
