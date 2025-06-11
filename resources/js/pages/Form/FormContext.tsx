@@ -12,7 +12,7 @@ import { useForm } from '@inertiajs/react'
 // Define types
 interface FormContextType {
     rawTemplate: App.Data.TemplateData;
-    evlauatedFormFields: Array<App.Data.Form.FieldData> | null;
+    evaluatedFormFields: Array<App.Data.Form.FieldData> | null;
     formSchema: z.ZodObject<any>;
     form: UseFormReturn<any>;
     errors: Partial<Record<keyof FormData, string>>;
@@ -34,11 +34,11 @@ export const FormContextProvider = ({ children, rawTemplate }: ExtendedPageProps
     const { org } = usePage<SharedData>().props;
 
     // Form fields -> evaluate the form conditions and return valid
-    let evlauatedFormFields = rawTemplate.form ?? []
+    let evaluatedFormFields = rawTemplate.form ?? []
 
     // Schema builder
     const formSchema = z.object(Object.fromEntries(
-        evlauatedFormFields.map(field => {
+        evaluatedFormFields.map(field => {
             switch (field.type) {
                 case "text":
                     return [field.id, z.string()];
@@ -56,7 +56,7 @@ export const FormContextProvider = ({ children, rawTemplate }: ExtendedPageProps
     const form = useReactForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: Object.fromEntries(
-            evlauatedFormFields.map(field => {
+            evaluatedFormFields.map(field => {
                 switch (field.type) {
                     case "text":
                         return [field.id, field.default ?? ""];
@@ -92,7 +92,7 @@ export const FormContextProvider = ({ children, rawTemplate }: ExtendedPageProps
     }
 
     return (
-      <FormContext.Provider value={{ rawTemplate, evlauatedFormFields, formSchema, form, errors, processing, onSubmit }}>
+      <FormContext.Provider value={{ rawTemplate, evaluatedFormFields, formSchema, form, errors, processing, onSubmit }}>
         {children}
       </FormContext.Provider>
     );

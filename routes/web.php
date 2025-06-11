@@ -1,5 +1,6 @@
 <?php
 
+use App\Data\TemplateData;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\TemplateController;
 use App\Models\Organization;
@@ -43,6 +44,10 @@ Route::middleware(['auth', ValidateSessionWithWorkOS::class,])->group(function (
 
     });
 
+});
+
+Route::get('view', function () {
+    return Inertia::render('View/Page', []);
 });
 
 require __DIR__.'/settings.php';

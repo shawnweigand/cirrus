@@ -9,7 +9,7 @@ type ExtendedPageProps = { }
 
 export default function Form({ }: ExtendedPageProps) {
 
-    const { rawTemplate, evlauatedFormFields, form, onSubmit } = useFormContext()
+    const { rawTemplate, evaluatedFormFields, form, onSubmit } = useFormContext()
 
     const selectField = (field: App.Data.Form.FieldData) => {
         switch (field.type) {
@@ -25,7 +25,7 @@ export default function Form({ }: ExtendedPageProps) {
 
         <div className="w-full max-w-3xl mx-auto">
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
-                {evlauatedFormFields?.map(field => {
+                {evaluatedFormFields?.map(field => {
                     return selectField(field)
                 })}
                 <Button type="submit">Submit</Button>
