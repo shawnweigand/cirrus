@@ -195,78 +195,8 @@ store.post = (args: { slug: string | number } | [slug: string | number] | string
 })
 
 /**
- * @see \App\Http\Controllers\TemplateController::edit
- * @see app/Http/Controllers/TemplateController.php:75
- * @route /{slug}/templates/{template}/edit
- */
-export const edit = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
-    url: string,
-    method: 'get',
-} => ({
-    url: edit.url(args, options),
-    method: 'get',
-})
-
-edit.definition = {
-    methods: ['get','head'],
-    url: '\/{slug}\/templates\/{template}\/edit',
-}
-
-/**
- * @see \App\Http\Controllers\TemplateController::edit
- * @see app/Http/Controllers/TemplateController.php:75
- * @route /{slug}/templates/{template}/edit
- */
-edit.url = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
-    if (Array.isArray(args)) {
-        args = {
-            slug: args[0],
-            template: args[1],
-        }
-    }
-
-    const parsedArgs = {
-        slug: args.slug,
-        template: typeof args.template === 'object'
-            ? args.template.id
-            : args.template,
-    }
-
-    return edit.definition.url
-            .replace('{slug}', parsedArgs.slug.toString())
-            .replace('{template}', parsedArgs.template.toString())
-            .replace(/\/+$/, '') + queryParams(options)
-}
-
-/**
- * @see \App\Http\Controllers\TemplateController::edit
- * @see app/Http/Controllers/TemplateController.php:75
- * @route /{slug}/templates/{template}/edit
- */
-edit.get = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
-    url: string,
-    method: 'get',
-} => ({
-    url: edit.url(args, options),
-    method: 'get',
-})
-
-/**
- * @see \App\Http\Controllers\TemplateController::edit
- * @see app/Http/Controllers/TemplateController.php:75
- * @route /{slug}/templates/{template}/edit
- */
-edit.head = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
-    url: string,
-    method: 'head',
-} => ({
-    url: edit.url(args, options),
-    method: 'head',
-})
-
-/**
  * @see \App\Http\Controllers\TemplateController::update
- * @see app/Http/Controllers/TemplateController.php:83
+ * @see app/Http/Controllers/TemplateController.php:99
  * @route /{slug}/templates/{template}
  */
 export const update = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -284,7 +214,7 @@ update.definition = {
 
 /**
  * @see \App\Http\Controllers\TemplateController::update
- * @see app/Http/Controllers/TemplateController.php:83
+ * @see app/Http/Controllers/TemplateController.php:99
  * @route /{slug}/templates/{template}
  */
 update.url = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -310,7 +240,7 @@ update.url = (args: { slug: string | number, template: string | number | { id: s
 
 /**
  * @see \App\Http\Controllers\TemplateController::update
- * @see app/Http/Controllers/TemplateController.php:83
+ * @see app/Http/Controllers/TemplateController.php:99
  * @route /{slug}/templates/{template}
  */
 update.put = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -323,7 +253,7 @@ update.put = (args: { slug: string | number, template: string | number | { id: s
 
 /**
  * @see \App\Http\Controllers\TemplateController::update
- * @see app/Http/Controllers/TemplateController.php:83
+ * @see app/Http/Controllers/TemplateController.php:99
  * @route /{slug}/templates/{template}
  */
 update.patch = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -336,7 +266,7 @@ update.patch = (args: { slug: string | number, template: string | number | { id:
 
 /**
  * @see \App\Http\Controllers\TemplateController::destroy
- * @see app/Http/Controllers/TemplateController.php:91
+ * @see app/Http/Controllers/TemplateController.php:107
  * @route /{slug}/templates/{template}
  */
 export const destroy = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -354,7 +284,7 @@ destroy.definition = {
 
 /**
  * @see \App\Http\Controllers\TemplateController::destroy
- * @see app/Http/Controllers/TemplateController.php:91
+ * @see app/Http/Controllers/TemplateController.php:107
  * @route /{slug}/templates/{template}
  */
 destroy.url = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -380,7 +310,7 @@ destroy.url = (args: { slug: string | number, template: string | number | { id: 
 
 /**
  * @see \App\Http\Controllers\TemplateController::destroy
- * @see app/Http/Controllers/TemplateController.php:91
+ * @see app/Http/Controllers/TemplateController.php:107
  * @route /{slug}/templates/{template}
  */
 destroy.delete = (args: { slug: string | number, template: string | number | { id: string | number } } | [slug: string | number, template: string | number | { id: string | number }], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -389,6 +319,74 @@ destroy.delete = (args: { slug: string | number, template: string | number | { i
 } => ({
     url: destroy.url(args, options),
     method: 'delete',
+})
+
+/**
+ * @see \App\Http\Controllers\TemplateController::edit
+ * @see app/Http/Controllers/TemplateController.php:75
+ * @route /{slug}/templates/{template_slug}/edit
+ */
+export const edit = (args: { slug: string | number, template_slug: string | number } | [slug: string | number, template_slug: string | number], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+    url: string,
+    method: 'get',
+} => ({
+    url: edit.url(args, options),
+    method: 'get',
+})
+
+edit.definition = {
+    methods: ['get','head'],
+    url: '\/{slug}\/templates\/{template_slug}\/edit',
+}
+
+/**
+ * @see \App\Http\Controllers\TemplateController::edit
+ * @see app/Http/Controllers/TemplateController.php:75
+ * @route /{slug}/templates/{template_slug}/edit
+ */
+edit.url = (args: { slug: string | number, template_slug: string | number } | [slug: string | number, template_slug: string | number], options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
+    if (Array.isArray(args)) {
+        args = {
+            slug: args[0],
+            template_slug: args[1],
+        }
+    }
+
+    const parsedArgs = {
+        slug: args.slug,
+        template_slug: args.template_slug,
+    }
+
+    return edit.definition.url
+            .replace('{slug}', parsedArgs.slug.toString())
+            .replace('{template_slug}', parsedArgs.template_slug.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+ * @see \App\Http\Controllers\TemplateController::edit
+ * @see app/Http/Controllers/TemplateController.php:75
+ * @route /{slug}/templates/{template_slug}/edit
+ */
+edit.get = (args: { slug: string | number, template_slug: string | number } | [slug: string | number, template_slug: string | number], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+    url: string,
+    method: 'get',
+} => ({
+    url: edit.url(args, options),
+    method: 'get',
+})
+
+/**
+ * @see \App\Http\Controllers\TemplateController::edit
+ * @see app/Http/Controllers/TemplateController.php:75
+ * @route /{slug}/templates/{template_slug}/edit
+ */
+edit.head = (args: { slug: string | number, template_slug: string | number } | [slug: string | number, template_slug: string | number], options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+    url: string,
+    method: 'head',
+} => ({
+    url: edit.url(args, options),
+    method: 'head',
 })
 
 /**
@@ -459,6 +457,6 @@ show.head = (args: { slug: string | number, template_slug: string | number } | [
     method: 'head',
 })
 
-const TemplateController = { index, create, store, edit, update, destroy, show }
+const TemplateController = { index, create, store, update, destroy, edit, show }
 
 export default TemplateController

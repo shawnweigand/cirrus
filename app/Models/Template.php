@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\Template\FormCast;
 use App\Enums\Template\TemplateCategoryEnum;
 use App\Enums\Template\TemplateKindEnum;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +25,7 @@ class Template extends Model
     protected function casts(): array
     {
         return [
-            'form' => 'array',
+            'form' => FormCast::class,
             'category' => TemplateCategoryEnum::class,
             'kind' => TemplateKindEnum::class,
         ];
