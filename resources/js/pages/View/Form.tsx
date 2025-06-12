@@ -7,13 +7,19 @@ import { useForm as useReactForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod";
 import TextField from "./TextField";
 
+interface Schema {
+    title: string;
+    path: string;
+    content: Array<App.Data.Form.FieldData>;
+}
+
 type ExtendedPageProps = {
-    schema: Array<App.Data.Form.FieldData>
+    schema: Schema
  }
 
 export default function Form({ schema }: ExtendedPageProps) {
 
-    let evaluatedFormFields = schema ?? []
+    let evaluatedFormFields = schema.content ?? []
 
     let formSchema = z.object(Object.fromEntries(
         evaluatedFormFields.map(field => {
@@ -51,7 +57,16 @@ export default function Form({ schema }: ExtendedPageProps) {
 
     const onSubmit = (data: z.infer<typeof formSchema>) => {
         console.log("Form submitted with data:", data);
-        // Handle form submission logic here
+
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${schema.title}.auto.tfvars.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     }
 
     return (

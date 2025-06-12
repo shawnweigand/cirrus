@@ -56,7 +56,7 @@ export default function Page({ }: ExtendedPageProps) {
                                     <CardDescription>This is a description of the module</CardDescription>
                                 </CardHeader>
                                 <CardContent className="grid gap-6">
-                                    <Form key={index} schema={schema.content} />
+                                    <Form key={index} schema={schema} />
                                 </CardContent>
                             </Card>
                         </TabsContent>
