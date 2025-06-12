@@ -1,11 +1,15 @@
 <?php
 
+use App\Data\TemplateData;
+use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\TemplateController;
+use App\Http\Middleware\AllowIframe;
 use App\Models\Organization;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\WorkOS\Http\Middleware\ValidateSessionWithWorkOS;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
@@ -36,9 +40,18 @@ Route::middleware(['auth', ValidateSessionWithWorkOS::class,])->group(function (
         Route::get('templates/{template_slug}', [TemplateController::class, 'show'])
             ->name('templates.show');
 
+        Route::resource('submissions', SubmissionController::class)
+            ->scoped(['submission' => 'id'])
+            ->names('submissions');
+
     });
 
 });
+
+Route::get('view', function () {
+    return Inertia::render('View/Page', []);
+})->middleware([AllowIframe::class])
+  ->name('view');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
