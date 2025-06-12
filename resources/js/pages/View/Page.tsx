@@ -3,7 +3,7 @@ import {
   } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
 import TextField from "../Form/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { useForm as useReactForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,19 +11,34 @@ import Form from "./Form";
 
 type ExtendedPageProps = { }
 
+interface Schema {
+    title: string;
+    path: string;
+    content: Array<App.Data.Form.FieldData>;
+}
+
 export default function Page({ }: ExtendedPageProps) {
 
-    let json = [
-        [{"id":"name","type":"text","label":"Name","description":"The name of your VM","default":"test","validation":["required","max:5"]}],
-        [{"id":"name","type":"text","label":"Name","description":"The name of your VM","default":"test","validation":["required","max:5"]}]
-    ];
+    const [schemas, setSchemas] = useState([] as Array<Schema>);
 
-    const [schemas, setSchemas] = useState(json as Array<Array<App.Data.Form.FieldData>>);
+    useEffect(() => {
+        const handleMessage = (event: MessageEvent) => {
+            if (event.data?.type === 'LOAD_SCHEMAS') {
+                setSchemas(event.data.schemas);
+            }
+        };
+
+        window.addEventListener('message', handleMessage);
+
+        window.parent.postMessage({ type: 'REQUEST_SCHEMAS' }, '*');
+
+        return () => window.removeEventListener('message', handleMessage);
+    }, []);
 
     return (
         <>
             {schemas.map((schema, index) => (
-                <Form key={index} schema={schema} />
+                <Form key={index} schema={schema.content} />
             ))}
         </>
       )
