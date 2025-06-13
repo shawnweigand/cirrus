@@ -4,8 +4,10 @@ import {
 import { Button } from "@/components/ui/button"
 import { z } from "zod";
 import { useForm as useReactForm } from "react-hook-form"
+import { useForm as useInertiaForm } from "@inertiajs/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import TextField from "./TextField";
+import { useEffect } from "react";
 
 interface Schema {
     title: string;
@@ -55,18 +57,40 @@ export default function Form({ schema }: ExtendedPageProps) {
         }
     }
 
-    const onSubmit = (data: z.infer<typeof formSchema>) => {
-        console.log("Form submitted with data:", data);
+    const { data, setData, post, processing, errors } = useInertiaForm({
+        'data': {},
+        'validation': {}
+    });
 
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `${schema.title}.auto.tfvars.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+    useEffect(() => {
+        setData({
+            'data': form.getValues(),
+            'validation': Object.fromEntries(evaluatedFormFields
+                .filter(field => form.getValues.hasOwnProperty(field.id))
+                .map(field => [field.id, field.validation]))
+        })
+    }, [form])
+
+    const onSubmit = (formData: z.infer<typeof formSchema>) => {
+        console.log("Data to be sent:", data);
+        post(route('validate'), {
+            preserveScroll: true,
+            onSuccess: (response) => {
+                console.log("Response from server:", response);
+            },
+            onError: (error) => {
+                console.error("Error from server:", error);
+            }
+        })
+        // const blob = new Blob([JSON.stringify(formData, null, 2)], { type: "application/json" });
+        // const url = URL.createObjectURL(blob);
+        // const a = document.createElement("a");
+        // a.href = url;
+        // a.download = `${schema.title}.auto.tfvars.json`;
+        // document.body.appendChild(a);
+        // a.click();
+        // document.body.removeChild(a);
+        // URL.revokeObjectURL(url);
     }
 
     return (

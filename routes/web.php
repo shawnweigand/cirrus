@@ -1,6 +1,8 @@
 <?php
 
 use App\Data\TemplateData;
+use App\Http\Controllers\FormValidationController;
+use App\Http\Controllers\FormValidationFontroller;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Middleware\AllowIframe;
@@ -52,6 +54,9 @@ Route::get('view', function () {
     return Inertia::render('View/Page', []);
 })->middleware([AllowIframe::class])
   ->name('view');
+
+Route::post('/validate', [FormValidationController::class, 'validateForm'])
+    ->name('validate');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
