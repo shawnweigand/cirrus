@@ -57,19 +57,10 @@ export default function Form({ schema }: ExtendedPageProps) {
         }
     }
 
-    const { data, setData, post, processing, errors } = useInertiaForm({
+    const { data, setData, post, processing, errors, transform } = useInertiaForm({
         'data': {},
         'validation': {}
     });
-
-    useEffect(() => {
-        setData({
-            'data': form.getValues(),
-            'validation': Object.fromEntries(evaluatedFormFields
-                .filter(field => form.getValues.hasOwnProperty(field.id))
-                .map(field => [field.id, field.validation]))
-        })
-    }, [form])
 
     const onSubmit = (formData: z.infer<typeof formSchema>) => {
         console.log("Data to be sent:", data);
@@ -92,6 +83,13 @@ export default function Form({ schema }: ExtendedPageProps) {
         // document.body.removeChild(a);
         // URL.revokeObjectURL(url);
     }
+
+    transform((data) => ({
+        'data': form.getValues(),
+        'validation': Object.fromEntries(evaluatedFormFields
+                .filter(field => form.getValues.hasOwnProperty(field.id))
+                .map(field => [field.id, field.validation]))
+    }));
 
     return (
         <ReactForm {...form}>
