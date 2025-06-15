@@ -3,11 +3,13 @@ import {
   } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
 import { z } from "zod";
-import { useForm as useReactForm } from "react-hook-form"
+import { set, useForm as useReactForm } from "react-hook-form"
 import { useForm as useInertiaForm } from "@inertiajs/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import TextField from "./TextField";
-import { useEffect } from "react";
+import { DownloadIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 
 interface Schema {
     title: string;
@@ -62,33 +64,46 @@ export default function Form({ schema }: ExtendedPageProps) {
         'validation': {}
     });
 
+    let [validated, setValidated] = useState(false)
+
+    useEffect(() => {
+        form.watch((values, { name, type }) => {
+            // console.log(`Field changed: ${name}, Type: ${type}, Values:`, values);
+            setValidated(false);
+        })
+    }, [form.watch])
+
     const onSubmit = (formData: z.infer<typeof formSchema>) => {
-        console.log("Data to be sent:", data);
+        // console.log("Data to be sent:", data);
         post(route('validate'), {
             preserveScroll: true,
             onSuccess: (response) => {
                 console.log("Response from server:", response);
+                setValidated(true);
             },
             onError: (error) => {
                 console.error("Error from server:", error);
             }
         })
-        // const blob = new Blob([JSON.stringify(formData, null, 2)], { type: "application/json" });
-        // const url = URL.createObjectURL(blob);
-        // const a = document.createElement("a");
-        // a.href = url;
-        // a.download = `${schema.title}.auto.tfvars.json`;
-        // document.body.appendChild(a);
-        // a.click();
-        // document.body.removeChild(a);
-        // URL.revokeObjectURL(url);
+    }
+
+    const onDownload = () => {
+        const blob = new Blob([JSON.stringify(form.getValues(), null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${schema.title}.auto.tfvars.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     }
 
     transform((data) => ({
-        'data': form.getValues(),
-        'validation': Object.fromEntries(evaluatedFormFields
-                .filter(field => form.getValues.hasOwnProperty(field.id))
-                .map(field => [field.id, field.validation]))
+        data: form.getValues(),
+        validation: Object.fromEntries(
+            evaluatedFormFields.map(field => [field.id, field.validation])
+        ),
     }));
 
     return (
@@ -99,7 +114,20 @@ export default function Form({ schema }: ExtendedPageProps) {
                 {evaluatedFormFields?.map((field, index) => {
                     return selectField(field, index)
                 })}
-                <Button type="submit">Submit</Button>
+                <div className="w-1/6 flex justify-between">
+                    <Button type="submit" className="cursor-pointer" disabled={processing}>Save</Button>
+                    <HoverCard>
+                        <HoverCardTrigger asChild>
+                            <Button type="button" variant="secondary" className="cursor-pointer" disabled={!validated}>
+                                <DownloadIcon className="h-4 w-4" />
+                            </Button>
+                        </HoverCardTrigger>
+                        <HoverCardContent className="w-80 text-sm flex justify-center">
+                            Download as
+                            <p className="ml-1 italic text-gray-400">{schema.title}.auto.tfvars.json</p>
+                        </HoverCardContent>
+                    </HoverCard>
+                </div>
             </form>
         </div>
 

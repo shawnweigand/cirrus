@@ -1,15 +1,8 @@
-import {
-    Form as ReactForm,
-  } from "@/components/ui/form"
-import { Button } from "@/components/ui/button"
-import TextField from "../Form/TextField";
 import { useEffect, useState } from "react";
-import { z } from "zod";
-import { useForm as useReactForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod";
 import Form from "./Form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useForm as useInertiaForm } from "@inertiajs/react";
 
 type ExtendedPageProps = { }
 
@@ -37,7 +30,6 @@ export default function Page({ }: ExtendedPageProps) {
         return () => window.removeEventListener('message', handleMessage);
     }, []);
 
-
     return (
         <div className="w-full flex justify-center">
             <div className="flex w-full max-w-4xl flex-col gap-6">
@@ -45,7 +37,7 @@ export default function Page({ }: ExtendedPageProps) {
                 <Tabs defaultValue={schemas[0].title} className="w-full pt-16">
                     <TabsList>
                         {schemas.map((schema, index) => (
-                            <TabsTrigger value={schema.title} key={index}>{schema.title}</TabsTrigger>
+                            <TabsTrigger className="cursor-pointer" value={schema.title} key={index}>{schema.title}</TabsTrigger>
                         ))}
                     </TabsList>
                     {schemas.map((schema, index) => (

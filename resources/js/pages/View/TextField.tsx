@@ -15,7 +15,7 @@ export default function TextField({ templateField, form }: ExtendedPageProps) {
               name={templateField.id}
               render={({ field }) => (
                 <FormItem>
-         <FormLabel>{templateField.label}</FormLabel>
+                  <FormLabel>{templateField.label}</FormLabel>
                   <FormControl>
                     <Input placeholder={templateField.default ?? ""} {...field} />
                   </FormControl>
