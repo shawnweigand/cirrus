@@ -39,7 +39,8 @@ export default function Page({ }: ExtendedPageProps) {
                 <Tabs defaultValue={schemas[0].title} className="w-full pt-16">
                     <div className="flex items-center justify-between">
                         <TabsList>
-                            {/* Show if they have been validated */}
+                            {/* Show if they have been validated - pass this down for each download validated/setValidated */}
+                            {/* Rn, switching forms undoes the validated in the other field */}
                             {schemas.map((schema, index) => (
                                 <TabsTrigger className="cursor-pointer" value={schema.title} key={index}>{schema.title}</TabsTrigger>
                             ))}
