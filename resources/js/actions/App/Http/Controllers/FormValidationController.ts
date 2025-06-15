@@ -2,7 +2,7 @@ import { queryParams, type QueryParams } from './../../../../wayfinder'
 
 /**
  * @see \App\Http\Controllers\FormValidationController::validateForm
- * @see app/Http/Controllers/FormValidationController.php:9
+ * @see app/Http/Controllers/FormValidationController.php:11
  * @route /validate
  */
 export const validateForm = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -20,7 +20,7 @@ validateForm.definition = {
 
 /**
  * @see \App\Http\Controllers\FormValidationController::validateForm
- * @see app/Http/Controllers/FormValidationController.php:9
+ * @see app/Http/Controllers/FormValidationController.php:11
  * @route /validate
  */
 validateForm.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -29,7 +29,7 @@ validateForm.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams })
 
 /**
  * @see \App\Http\Controllers\FormValidationController::validateForm
- * @see app/Http/Controllers/FormValidationController.php:9
+ * @see app/Http/Controllers/FormValidationController.php:11
  * @route /validate
  */
 validateForm.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

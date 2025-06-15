@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\ValidateFormData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FormValidationController extends Controller
 {
@@ -10,14 +12,21 @@ class FormValidationController extends Controller
     {
         $data = $request->input('data', []);
         $rules = $request->input('validation', []);
-        dd($data, $rules);
-        // Adjust rules as needed
-        $validated = $request->validate([
-            'field1' => 'required|string',
-            'field2' => 'nullable|integer',
-            // ...other fields
+        // dd($data, $rules);
+
+        $request->validate([
+            'data' => ['required', 'array'],
+            'validation' => ['required', 'array'],
         ]);
 
-        return response()->json(['success' => true, 'data' => $validated]);
+        foreach ($data as $key => $value) {
+            Validator::make(
+                [$key => $value],
+                [$key => $rules[$key] ?? []]
+            )->validate();
+        }
+
+
+        // return response()->json(['success' => true, 'data' => $validated]);
     }
 }

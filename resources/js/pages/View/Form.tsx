@@ -10,6 +10,8 @@ import TextField from "./TextField";
 import { DownloadIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { on } from "events";
+import { toast } from "sonner"
 
 interface Schema {
     title: string;
@@ -59,7 +61,7 @@ export default function Form({ schema }: ExtendedPageProps) {
         }
     }
 
-    const { data, setData, post, processing, errors, transform } = useInertiaForm({
+    const { data, setData, post, processing, errors, transform, reset } = useInertiaForm({
         'data': {},
         'validation': {}
     });
@@ -78,11 +80,21 @@ export default function Form({ schema }: ExtendedPageProps) {
         post(route('validate'), {
             preserveScroll: true,
             onSuccess: (response) => {
-                console.log("Response from server:", response);
+                // reset();
                 setValidated(true);
+                toast("You submitted the following values:", {
+                    description: (
+                        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                        <code className="text-white">{JSON.stringify(formData, null, 2)}</code>
+                        </pre>
+                    ),
+                })
             },
             onError: (error) => {
-                console.error("Error from server:", error);
+                setValidated(false);
+                for (const [key, value] of Object.entries(error)) {
+                    toast.error(value);
+                }
             }
         })
     }
@@ -109,16 +121,29 @@ export default function Form({ schema }: ExtendedPageProps) {
     return (
         <ReactForm {...form}>
 
+        {/* {errors && Object.keys(errors).length > 0 && (
+            <div className="w-full max-w-3xl mx-auto">
+                <div className="bg-red-100 text-red-800 p-4 rounded-md mb-4">
+                    <h2 className="font-semibold">Validation Errors</h2>
+                    <ul className="list-disc pl-5 mt-2">
+                        {Object.entries(errors).map(([key, value]) => (
+                            <li key={key}>{value}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        )} */}
+
         <div className="w-full max-w-3xl mx-auto">
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
                 {evaluatedFormFields?.map((field, index) => {
                     return selectField(field, index)
                 })}
-                <div className="w-1/6 flex justify-between">
-                    <Button type="submit" className="cursor-pointer" disabled={processing}>Save</Button>
+                <div className="w-1/5 flex justify-between">
+                    <Button type="submit" className="cursor-pointer" disabled={processing}>Validate</Button>
                     <HoverCard>
                         <HoverCardTrigger asChild>
-                            <Button type="button" variant="secondary" className="cursor-pointer" disabled={!validated}>
+                            <Button type="button" onClick={onDownload} variant="secondary" className="cursor-pointer" disabled={!validated}>
                                 <DownloadIcon className="h-4 w-4" />
                             </Button>
                         </HoverCardTrigger>
