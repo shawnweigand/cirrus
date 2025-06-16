@@ -20,10 +20,12 @@ interface Schema {
 }
 
 type ExtendedPageProps = {
-    schema: Schema
+    schema: Schema;
+    validated: Record<string, boolean>;
+    setValidated: (value: Record<string, boolean>) => void;
  }
 
-export default function Form({ schema }: ExtendedPageProps) {
+export default function Form({ schema, validated, setValidated }: ExtendedPageProps) {
 
     let evaluatedFormFields = schema.content ?? []
 
@@ -66,12 +68,14 @@ export default function Form({ schema }: ExtendedPageProps) {
         'validation': {}
     });
 
-    let [validated, setValidated] = useState(false)
 
     useEffect(() => {
         form.watch((values, { name, type }) => {
             // console.log(`Field changed: ${name}, Type: ${type}, Values:`, values);
-            setValidated(false);
+            setValidated({
+                ...validated,
+                [schema.title]: false
+            });
         })
     }, [form.watch])
 
@@ -81,7 +85,10 @@ export default function Form({ schema }: ExtendedPageProps) {
             preserveScroll: true,
             onSuccess: (response) => {
                 // reset();
-                setValidated(true);
+                setValidated({
+                ...validated,
+                [schema.title]: true
+            });
                 toast("You submitted the following values:", {
                     description: (
                         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
@@ -91,7 +98,10 @@ export default function Form({ schema }: ExtendedPageProps) {
                 })
             },
             onError: (error) => {
-                setValidated(false);
+                setValidated({
+                    ...validated,
+                    [schema.title]: false
+                });
                 for (const [key, value] of Object.entries(error)) {
                     toast.error(value);
                 }
@@ -143,7 +153,7 @@ export default function Form({ schema }: ExtendedPageProps) {
                     <Button type="submit" className="cursor-pointer" disabled={processing}>Validate</Button>
                     <HoverCard>
                         <HoverCardTrigger asChild>
-                            <Button type="button" onClick={onDownload} variant="secondary" className="cursor-pointer" disabled={!validated}>
+                            <Button type="button" onClick={onDownload} variant="secondary" className="cursor-pointer" disabled={!validated[schema.title]}>
                                 <DownloadIcon className="h-4 w-4" />
                             </Button>
                         </HoverCardTrigger>
