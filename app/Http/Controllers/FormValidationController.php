@@ -26,6 +26,7 @@ class FormValidationController extends Controller
             )->validate();
         }
 
+        // return response()->json($request->all());
 
         // return response()->json(['success' => true, 'data' => $validated]);
     }

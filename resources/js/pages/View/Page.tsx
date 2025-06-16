@@ -51,13 +51,18 @@ export default function Page({ }: ExtendedPageProps) {
         }
     }, [schemas]);
 
-    const { data, setData, post, processing, errors, transform, reset } = useInertiaForm({
-        'data': {},
-        'validation': {}
-    });
+    const { data, setData, post, processing, errors, transform, reset } = useInertiaForm({});
 
     const onDownload = () => {
-        console.log('hi')
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${filenamePrefix}.auto.tfvars.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     }
 
     return (
@@ -106,7 +111,7 @@ export default function Page({ }: ExtendedPageProps) {
                                     {/* <CardDescription>This is a description of the module</CardDescription> */}
                             </CardHeader>
                             <CardContent className="grid gap-6">
-                                <Form key={activeSchema.title} schema={activeSchema} validated={validated} setValidated={setValidated} />
+                                <Form key={activeSchema.title} schema={activeSchema} validated={validated} setValidated={setValidated} parentData={data} setParentData={setData} />
                             </CardContent>
                         </Card>
                     </TabsContent>

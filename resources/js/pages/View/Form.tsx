@@ -23,9 +23,11 @@ type ExtendedPageProps = {
     schema: Schema;
     validated: Record<string, boolean>;
     setValidated: (value: Record<string, boolean>) => void;
+    parentData: Record<string, any>;
+    setParentData: (value: Record<string, any>) => void;
  }
 
-export default function Form({ schema, validated, setValidated }: ExtendedPageProps) {
+export default function Form({ schema, validated, setValidated, parentData, setParentData }: ExtendedPageProps) {
 
     let evaluatedFormFields = schema.content ?? []
 
@@ -68,7 +70,6 @@ export default function Form({ schema, validated, setValidated }: ExtendedPagePr
         'validation': {}
     });
 
-
     useEffect(() => {
         form.watch((values, { name, type }) => {
             // console.log(`Field changed: ${name}, Type: ${type}, Values:`, values);
@@ -84,18 +85,22 @@ export default function Form({ schema, validated, setValidated }: ExtendedPagePr
         post(route('validate'), {
             preserveScroll: true,
             onSuccess: (response) => {
-                reset();
                 setValidated({
-                ...validated,
-                [schema.title]: true
-            });
+                    ...validated,
+                    [schema.title]: true
+                });
                 toast("You submitted the following values:", {
                     description: (
                         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                        <code className="text-white">{JSON.stringify(formData, null, 2)}</code>
+                            <code className="text-white">{JSON.stringify(formData, null, 2)}</code>
                         </pre>
                     ),
+                });
+                setParentData({
+                    ...parentData,
+                    ...(transformData().data)
                 })
+                reset();
             },
             onError: (error) => {
                 setValidated({
@@ -121,12 +126,16 @@ export default function Form({ schema, validated, setValidated }: ExtendedPagePr
         URL.revokeObjectURL(url);
     }
 
-    transform((data) => ({
-        data: form.getValues(),
-        validation: Object.fromEntries(
-            evaluatedFormFields.map(field => [field.id, field.validation])
-        ),
-    }));
+    const transformData = () => {
+        return {
+            data: form.getValues(),
+            validation: Object.fromEntries(
+                evaluatedFormFields.map(field => [field.id, field.validation])
+            ),
+        }
+    }
+
+    transform((data) => transformData());
 
     return (
         <ReactForm {...form}>
