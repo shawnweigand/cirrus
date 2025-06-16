@@ -84,7 +84,7 @@ export default function Form({ schema, validated, setValidated }: ExtendedPagePr
         post(route('validate'), {
             preserveScroll: true,
             onSuccess: (response) => {
-                // reset();
+                reset();
                 setValidated({
                 ...validated,
                 [schema.title]: true

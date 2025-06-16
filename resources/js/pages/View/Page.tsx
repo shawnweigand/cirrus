@@ -7,7 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Toaster } from '@/components/ui/sonner';
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { AlertCircle, CheckCircle } from "lucide-react";
+import { AlertCircle, CheckCircle, DownloadIcon } from "lucide-react";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { Input } from "@/components/ui/input";
 
 type ExtendedPageProps = { }
 
@@ -26,6 +28,7 @@ export default function Page({ }: ExtendedPageProps) {
         path: '',
         content: [] as Array<App.Data.Form.FieldData>
     });
+    const [filenamePrefix, setFilenamePrefix] = useState("variables")
 
     useEffect(() => {
         const handleMessage = (event: MessageEvent) => {
@@ -48,6 +51,15 @@ export default function Page({ }: ExtendedPageProps) {
         }
     }, [schemas]);
 
+    const { data, setData, post, processing, errors, transform, reset } = useInertiaForm({
+        'data': {},
+        'validation': {}
+    });
+
+    const onDownload = () => {
+        console.log('hi')
+    }
+
     return (
         <div className="w-full flex justify-center">
             <div className="flex w-full max-w-4xl flex-col gap-6">
@@ -55,8 +67,6 @@ export default function Page({ }: ExtendedPageProps) {
                 <Tabs defaultValue={schemas[0].title} onValueChange={tab => setActiveSchema(schemas.find(schema => schema.title === tab) ?? activeSchema)} className="w-full pt-16">
                     <div className="flex items-center justify-between">
                         <TabsList>
-                            {/* Show if they have been validated - pass this down for each download validated/setValidated */}
-                            {/* Rn, switching forms undoes the validated in the other field */}
                             {schemas.map((schema, index) => (
                                 <TabsTrigger className="cursor-pointer flex items-center gap-1" value={schema.title} key={index}>
                                     {schema.title}
@@ -75,9 +85,19 @@ export default function Page({ }: ExtendedPageProps) {
                                 </TabsTrigger>
                             ))}
                         </TabsList>
-                        <Button className="cursor-pointer">
-                            Download validated templates
-                        </Button>
+                        <HoverCard>
+                            <HoverCardTrigger asChild>
+                                <Button type="button" onClick={onDownload} variant="secondary" className="cursor-pointer" disabled={!Object.values(validated).some(Boolean)}>
+                                    <DownloadIcon className="h-4 w-4" />
+                                    Download all valid templates
+                                </Button>
+                            </HoverCardTrigger>
+                            <HoverCardContent className="w-80 text-sm flex items-center whitespace-nowrap">
+                                <span className="text-muted-foreground">Download as</span>
+                                <Input value={filenamePrefix} onChange={(e) => setFilenamePrefix(e.target.value)} className="ml-2 h-auto py-0 pl-1 text-right italic text-gray-400 text-xs" />
+                                <span className="italic text-gray-400">.auto.tfvars.json</span>
+                            </HoverCardContent>
+                        </HoverCard>
                     </div>
                     <TabsContent value={activeSchema.title} key={activeSchema.title}>
                         <Card>
