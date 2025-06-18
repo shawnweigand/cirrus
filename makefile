@@ -3,7 +3,7 @@ DOCKER_COMPOSE = docker-compose
 APP_CONTAINER = app  # Change this to the name of your app container
 SHELL_COMMAND = /bin/bash  # Or /bin/sh, depending on your container
 
-.PHONY: up exec run install secrets setup
+.PHONY: up exec run install secrets setup ts
 
 # Bring up the Docker Compose services
 up:
@@ -33,6 +33,9 @@ setup:
 	make install
 	make migrate
 	# make schedule
+
+ts:
+	php artisan typescript:transform
 
 # Sync HashiCorp Vault secrets with cluster
 secrets:

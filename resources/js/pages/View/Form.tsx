@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { on } from "events";
 import { toast } from "sonner"
+import OptionField from "./OptionField";
 
 interface Schema {
     title: string;
@@ -59,7 +60,9 @@ export default function Form({ schema, validated, setValidated, parentData, setP
     const selectField = (field: App.Data.Form.FieldData, index: number) => {
         switch (field.type) {
             case 'text':
-                return <TextField templateField={field} form={form} key={index} />
+                return <TextField templateField={field as App.Data.Form.TextFieldData} form={form} key={index} />
+            case 'option':
+                return <OptionField templateField={field as App.Data.Form.OptionFieldData} form={form} key={index} />
             default:
                 return null;
         }
@@ -155,9 +158,11 @@ export default function Form({ schema, validated, setValidated, parentData, setP
 
         <div className="w-full max-w-3xl mx-auto">
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
-                {evaluatedFormFields?.map((field, index) => {
-                    return selectField(field, index)
-                })}
+                <div className="space-y-16">
+                    {evaluatedFormFields?.map((field, index) => {
+                        return selectField(field, index)
+                    })}
+                </div>
                 <div className="w-1/5 flex justify-between">
                     <Button type="submit" className="cursor-pointer" disabled={processing}>Validate</Button>
                     <HoverCard>

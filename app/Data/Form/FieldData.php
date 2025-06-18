@@ -3,7 +3,6 @@
 namespace App\Data\Form;
 
 use Spatie\LaravelData\Data;
-
 class FieldData extends Data
 {
     public function __construct(
