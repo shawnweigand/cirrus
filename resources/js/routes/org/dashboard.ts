@@ -1,7 +1,7 @@
 import { queryParams, type QueryParams } from './../../wayfinder'
 
 /**
- * @see routes/web.php:26
+ * @see routes/web.php:28
  * @route /{slug}/dashboard
  */
 export const dashboard = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -18,7 +18,7 @@ dashboard.definition = {
 }
 
 /**
- * @see routes/web.php:26
+ * @see routes/web.php:28
  * @route /{slug}/dashboard
  */
 dashboard.url = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -42,7 +42,7 @@ dashboard.url = (args: { slug: string | number } | [slug: string | number] | str
 }
 
 /**
- * @see routes/web.php:26
+ * @see routes/web.php:28
  * @route /{slug}/dashboard
  */
 dashboard.get = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -54,7 +54,7 @@ dashboard.get = (args: { slug: string | number } | [slug: string | number] | str
 })
 
 /**
- * @see routes/web.php:26
+ * @see routes/web.php:28
  * @route /{slug}/dashboard
  */
 dashboard.head = (args: { slug: string | number } | [slug: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

@@ -15,13 +15,12 @@ export default function TextField({ templateField, form }: ExtendedPageProps) {
               name={templateField.id}
               render={({ field }) => (
                 <FormItem>
-         <FormLabel>{templateField.label}</FormLabel>
+                  <FormLabel>{templateField.label}</FormLabel>
+                  <FormDescription>{templateField.description}</FormDescription>
                   <FormControl>
                     <Input placeholder={templateField.default ?? ""} {...field} />
                   </FormControl>
-                  <FormDescription>
-                    {templateField.description}
-                  </FormDescription>
+                  <FormLabel className="text-xs text-muted-foreground">{templateField.id}</FormLabel>
                   <FormMessage />
                 </FormItem>
               )}
