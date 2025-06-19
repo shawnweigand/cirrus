@@ -13,6 +13,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/h
 import { on } from "events";
 import { toast } from "sonner"
 import OptionField from "./OptionField";
+import MultiField from "./MultiField";
 
 interface Schema {
     title: string;
@@ -30,6 +31,7 @@ type ExtendedPageProps = {
 
 export default function Form({ schema, validated, setValidated, parentData, setParentData }: ExtendedPageProps) {
 
+    // Going to need a useeffect on form.watch to validate the field thats changed and any dependent fields (form.getValues() each time? Or track state of form separately.)
     let evaluatedFormFields = schema.content ?? []
 
     let formSchema = z.object(Object.fromEntries(
@@ -38,7 +40,9 @@ export default function Form({ schema, validated, setValidated, parentData, setP
                 case "text":
                     return [field.id, z.string()];
                 case "option":
-                    return [field.id, z.string()];
+                    return [field.id, z.union([z.string(), z.number()])];
+                case "multi":
+                    return [field.id, z.array(z.union([z.string(), z.number()]))];
                 default:
                     return [field.id, z.any()]; // fallback
             }
@@ -54,6 +58,8 @@ export default function Form({ schema, validated, setValidated, parentData, setP
                         return [field.id, field.default ?? ""];
                     case "option":
                         return [field.id, field.default.value ?? ""];
+                    case "multi":
+                        return [field.id, field.default ?? []]
                     default:
                         return [field.id, null]; // fallback
                 }
@@ -67,6 +73,8 @@ export default function Form({ schema, validated, setValidated, parentData, setP
                 return <TextField templateField={field as App.Data.Form.TextFieldData} form={form} key={index} />
             case 'option':
                 return <OptionField templateField={field as App.Data.Form.OptionFieldData} form={form} key={index} />
+            case 'multi':
+                return <MultiField templateField={field as App.Data.Form.MultiFieldData} form={form} key={index} />
             default:
                 return null;
         }

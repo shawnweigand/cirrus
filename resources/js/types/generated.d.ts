@@ -38,6 +38,17 @@ validation: Array<any> | null;
 condition: string | null;
 inCode: boolean | null;
 };
+export type MultiFieldData = {
+options: Array<any> | null;
+id: string;
+type: string;
+label: string;
+description: string;
+default: any;
+validation: Array<any> | null;
+condition: string | null;
+inCode: boolean | null;
+};
 export type OptionFieldData = {
 options: Array<any> | null;
 id: string;
