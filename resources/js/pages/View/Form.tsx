@@ -37,6 +37,8 @@ export default function Form({ schema, validated, setValidated, parentData, setP
             switch (field.type) {
                 case "text":
                     return [field.id, z.string()];
+                case "option":
+                    return [field.id, z.string()];
                 default:
                     return [field.id, z.any()]; // fallback
             }
@@ -50,6 +52,8 @@ export default function Form({ schema, validated, setValidated, parentData, setP
                 switch (field.type) {
                     case "text":
                         return [field.id, field.default ?? ""];
+                    case "option":
+                        return [field.id, field.default.value ?? ""];
                     default:
                         return [field.id, null]; // fallback
                 }

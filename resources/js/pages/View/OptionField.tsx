@@ -36,7 +36,7 @@ export default function OptionField({ templateField, form }: ExtendedPageProps) 
                                 )}
                                 >
                                 {field.value
-                                    ? templateField.options?.find((option) => option.value ?? '' === field.value)?.label
+                                    ? templateField.options?.find((option) => (option.value ?? '') === field.value)?.label
                                     : (templateField.default.label ?? "Select option...")}
                                     <ChevronsUpDown className="opacity-50" />
                                 </Button>
