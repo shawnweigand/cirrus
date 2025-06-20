@@ -106,13 +106,14 @@ export default function Form({ schema, validated, setValidated, parentData, setP
                     ...validated,
                     [schema.title]: true
                 });
-                toast("You submitted the following values:", {
-                    description: (
-                        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                            <code className="text-white">{JSON.stringify(transformData().data, null, 2)}</code>
-                        </pre>
-                    ),
-                });
+                // toast("You submitted the following values:", {
+                //     description: (
+                //         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                //             <code className="text-white">{JSON.stringify(transformData().data, null, 2)}</code>
+                //         </pre>
+                //     ),
+                // });
+                toast.success(`Values for ${schema.title} have been validated.`)
                 setParentData({
                     ...parentData,
                     ...(transformData().data)
@@ -175,20 +176,6 @@ export default function Form({ schema, validated, setValidated, parentData, setP
 
     transform((data) => transformData());
 
-    // const watchedValues = form.watch();
-
-    // const evaluatedFormFields = useMemo(() => {
-    //     console.log('evaluating...')
-    //     return formFields.filter((field: App.Data.Form.FieldData) => {
-    //         try {
-    //             return jexl.evalSync(field.condition ?? 'true', {form: form.getValues()})
-    //         } catch (e) {
-    //             console.error(`Error evaluating condition for field "${field.id}":`, e);
-    //             return false;
-    //         }
-    //     })
-    // }, [watchedValues, formFields])
-
     return (
         <ReactForm {...form}>
 
@@ -231,9 +218,9 @@ export default function Form({ schema, validated, setValidated, parentData, setP
             </form>
         </div>
 
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+        {/* <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
             <code className="text-white">{JSON.stringify(schema, null, 2)}</code>
-        </pre>
+        </pre> */}
 
         </ReactForm>
       )
