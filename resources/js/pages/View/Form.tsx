@@ -8,10 +8,13 @@ import { useForm as useInertiaForm } from "@inertiajs/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import TextField from "./TextField";
 import { DownloadIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { on } from "events";
 import { toast } from "sonner"
+import OptionField from "./OptionField";
+import MultiField from "./MultiField";
+import jexl from 'jexl';
 
 interface Schema {
     title: string;
@@ -25,17 +28,23 @@ type ExtendedPageProps = {
     setValidated: (value: Record<string, boolean>) => void;
     parentData: Record<string, any>;
     setParentData: (value: Record<string, any>) => void;
- }
+}
+
+jexl.addFunction('includes', (array, value) => {
+  return Array.isArray(array) && array.includes(value);
+});
 
 export default function Form({ schema, validated, setValidated, parentData, setParentData }: ExtendedPageProps) {
 
-    let evaluatedFormFields = schema.content ?? []
-
     let formSchema = z.object(Object.fromEntries(
-        evaluatedFormFields.map(field => {
+        schema.content?.map(field => {
             switch (field.type) {
                 case "text":
                     return [field.id, z.string()];
+                case "option":
+                    return [field.id, z.union([z.string(), z.number()])];
+                case "multi":
+                    return [field.id, z.array(z.union([z.string(), z.number()]))];
                 default:
                     return [field.id, z.any()]; // fallback
             }
@@ -45,10 +54,14 @@ export default function Form({ schema, validated, setValidated, parentData, setP
     let form = useReactForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: Object.fromEntries(
-            evaluatedFormFields.map(field => {
+            schema.content?.map(field => {
                 switch (field.type) {
                     case "text":
                         return [field.id, field.default ?? ""];
+                    case "option":
+                        return [field.id, field.default.value ?? ""];
+                    case "multi":
+                        return [field.id, field.default ?? []]
                     default:
                         return [field.id, null]; // fallback
                 }
@@ -59,7 +72,11 @@ export default function Form({ schema, validated, setValidated, parentData, setP
     const selectField = (field: App.Data.Form.FieldData, index: number) => {
         switch (field.type) {
             case 'text':
-                return <TextField templateField={field} form={form} key={index} />
+                return <TextField templateField={field as App.Data.Form.TextFieldData} form={form} key={index} />
+            case 'option':
+                return <OptionField templateField={field as App.Data.Form.OptionFieldData} form={form} key={index} />
+            case 'multi':
+                return <MultiField templateField={field as App.Data.Form.MultiFieldData} form={form} key={index} />
             default:
                 return null;
         }
@@ -89,13 +106,14 @@ export default function Form({ schema, validated, setValidated, parentData, setP
                     ...validated,
                     [schema.title]: true
                 });
-                toast("You submitted the following values:", {
-                    description: (
-                        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                            <code className="text-white">{JSON.stringify(formData, null, 2)}</code>
-                        </pre>
-                    ),
-                });
+                // toast("You submitted the following values:", {
+                //     description: (
+                //         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                //             <code className="text-white">{JSON.stringify(transformData().data, null, 2)}</code>
+                //         </pre>
+                //     ),
+                // });
+                toast.success(`Values for ${schema.title} have been validated.`)
                 setParentData({
                     ...parentData,
                     ...(transformData().data)
@@ -115,7 +133,7 @@ export default function Form({ schema, validated, setValidated, parentData, setP
     }
 
     const onDownload = () => {
-        const blob = new Blob([JSON.stringify(form.getValues(), null, 2)], { type: "application/json" });
+        const blob = new Blob([JSON.stringify(transformData().data, null, 2)], { type: "application/json" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
@@ -126,12 +144,33 @@ export default function Form({ schema, validated, setValidated, parentData, setP
         URL.revokeObjectURL(url);
     }
 
+    let evaluateCondition = (condition: string, formData = form.getValues()) => {
+        return jexl.evalSync(condition, {form: formData})
+    }
+
     const transformData = () => {
+        const values = form.getValues()
+
+        const filteredFields = schema.content.filter(field => {
+            try {
+                return evaluateCondition(field.condition ?? "true", values)
+            } catch (e) {
+                console.error(`Error evaluating condition for field "${field.id}":`, e);
+                return false;
+            }
+        });
+
+        const filteredData = Object.fromEntries(
+            filteredFields.map(field => [field.id, values[field.id]])
+        );
+
+        const filteredValidation = Object.fromEntries(
+            filteredFields.map(field => [field.id, field.validation])
+        );
+
         return {
-            data: form.getValues(),
-            validation: Object.fromEntries(
-                evaluatedFormFields.map(field => [field.id, field.validation])
-            ),
+            data: filteredData,
+            validation: filteredValidation
         }
     }
 
@@ -155,10 +194,14 @@ export default function Form({ schema, validated, setValidated, parentData, setP
 
         <div className="w-full max-w-3xl mx-auto">
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
-                {evaluatedFormFields?.map((field, index) => {
-                    return selectField(field, index)
-                })}
-                <div className="w-1/5 flex justify-between">
+                <div className="space-y-16">
+                    {schema.content?.map((field, index) => {
+                        if (evaluateCondition(field.condition ?? 'true')) {
+                            return selectField(field, index)
+                        }
+                    })}
+                </div>
+                <div className="w-1/5 flex justify-between my-16">
                     <Button type="submit" className="cursor-pointer" disabled={processing}>Validate</Button>
                     <HoverCard>
                         <HoverCardTrigger asChild>
@@ -175,9 +218,9 @@ export default function Form({ schema, validated, setValidated, parentData, setP
             </form>
         </div>
 
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+        {/* <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
             <code className="text-white">{JSON.stringify(schema, null, 2)}</code>
-        </pre>
+        </pre> */}
 
         </ReactForm>
       )

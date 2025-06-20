@@ -10,14 +10,14 @@ class FormValidationController extends Controller
 {
     public function validateForm(Request $request)
     {
-        $data = $request->input('data', []);
-        $rules = $request->input('validation', []);
-        // dd($data, $rules);
-
         $request->validate([
             'data' => ['required', 'array'],
             'validation' => ['required', 'array'],
         ]);
+
+        $data = $request->input('data', []);
+        $rules = $request->input('validation', []);
+        // dd($data, $rules);
 
         foreach ($data as $key => $value) {
             Validator::make(
