@@ -121,7 +121,7 @@ export const FormContextProvider = ({ children, rawSchema, validated, setValidat
 
         const filteredFields = rawSchema.content.filter(field => {
             try {
-                return evaluateCondition(field.condition ?? "true", values)
+                return (evaluateCondition(field.condition ?? "true", values) && (field.inCode ?? true))
             } catch (e) {
                 console.error(`Error evaluating condition for field "${field.id}":`, e);
                 return false;
