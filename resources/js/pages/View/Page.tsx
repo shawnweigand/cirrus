@@ -10,6 +10,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { AlertCircle, CheckCircle, DownloadIcon } from "lucide-react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Input } from "@/components/ui/input";
+import { FormContextProvider } from "./FormContext";
 
 type ExtendedPageProps = { }
 
@@ -28,6 +29,8 @@ export default function Page({ }: ExtendedPageProps) {
         path: '',
         content: [] as Array<App.Data.Form.FieldData>
     });
+    const [ data, setData ] = useState({});
+
     const [filenamePrefix, setFilenamePrefix] = useState("variables")
 
     useEffect(() => {
@@ -51,10 +54,8 @@ export default function Page({ }: ExtendedPageProps) {
         }
     }, [schemas]);
 
-    const { data, setData, post, processing, errors, transform, reset } = useInertiaForm({});
-
-    const onDownload = () => {
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    const onDownload = (downloadData: object) => {
+        const blob = new Blob([JSON.stringify(downloadData, null, 2)], { type: "application/json" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
@@ -92,7 +93,7 @@ export default function Page({ }: ExtendedPageProps) {
                         </TabsList>
                         <HoverCard>
                             <HoverCardTrigger asChild>
-                                <Button type="button" onClick={onDownload} variant="secondary" className="cursor-pointer" disabled={!Object.values(validated).some(Boolean)}>
+                                <Button type="button" onClick={() => onDownload(data)} variant="secondary" className="cursor-pointer" disabled={!Object.values(validated).some(Boolean)}>
                                     <DownloadIcon className="h-4 w-4" />
                                     Download all valid templates
                                 </Button>
@@ -111,7 +112,9 @@ export default function Page({ }: ExtendedPageProps) {
                                     {/* <CardDescription>This is a description of the module</CardDescription> */}
                             </CardHeader>
                             <CardContent className="grid gap-6">
-                                <Form key={activeSchema.title} schema={activeSchema} validated={validated} setValidated={setValidated} parentData={data} setParentData={setData} />
+                                <FormContextProvider rawSchema={activeSchema} validated={validated} setValidated={setValidated} allFormData={data} setAllFormData={setData} onDownload={onDownload}>
+                                    <Form key={activeSchema.title} />
+                                </FormContextProvider>
                             </CardContent>
                         </Card>
                     </TabsContent>
