@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import Form from "./Form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useForm as useInertiaForm } from "@inertiajs/react";
 import { Button } from "@/components/ui/button";
 import { Toaster } from '@/components/ui/sonner';
-import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { AlertCircle, CheckCircle, DownloadIcon } from "lucide-react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
